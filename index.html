@@ -451,7 +451,9 @@
 <p>第八题：<br>斐波那契数列变种。$F(n) = F(n-1) + F(n-2)$</p>
 <p>第九题：<br>斐波那契数列变种。$F(n) = $\sum_{k=1}^n-1\F(k)+1$</p>
 <p>第九题：<br>斐波那契数列变种。$F(n) = F(n-1) + F(n-2)$</p>
-<p>第十题：<br>求二进制中1的个数。比较麻烦的是负数。有关负数补码，可以参考另一篇博客“原码，反码和补码”。</p>
+<p>第十题：<br>求二进制中1的个数。比较麻烦的是负数。有关负数补码，可以参考另一篇博客“原码，反码和补码”。<br>其实这道题还可以直接对bit操作，会简单很多。但是我觉得出题人的初衷是要考察对原反补码的理解。whatever。以下是相关代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">NumberOf1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag&amp;n) &#123;</span><br><span class="line">            res ++;</span><br><span class="line">        &#125;</span><br><span class="line">        tag = tag &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
