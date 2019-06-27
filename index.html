@@ -242,6 +242,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/true-complemental-ones-complemental-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/27/true-complemental-ones-complemental-code/" itemprop="url">原码，反码，补码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T11:32:47+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在做题的时候遇到了相互转换的问题，于是在此做一个小结。<br>原码，即为数直接转换为二进制后的编码。负数与正数的差别为负数最高为为1，正数为0.<br>正数的反码和补码与原码相同。负数的反码为除最高位全部取反。负数的补码为反码加一。<br>如：<br>-5，原码1000 0101，反码1111 1010，补码1111 1011.<br>-0，原码1000 0000，反码1111 1111，补码0000 0000.</p>
+<p>127 原码0111 1111，反码0111 1111，补码0111 1111.<br>-127 原码1111 1111，反码1000 0000，补码1000 0001.<br>我们发现，1000 0000这个状态没有使用。如果我们把它当作补码。<br>最高位为1，所以是负数，相应的反码0111 1111. 相应的原码1000 0000.<br>所以，1000 0000可以表示-128的补码。</p>
+<p>因此，int（32位）取值范围为$-2^(32-1) - (2^(32-1)-1)$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/practice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -324,6 +446,12 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">R</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; pre, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vin, <span class="keyword">int</span> preStart, <span class="keyword">int</span> preEnd, <span class="keyword">int</span> vinStart, <span class="keyword">int</span> vinEnd)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (preStart &gt;= preEnd || vinStart &gt;= vinEnd) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// search the position in vin</span></span><br><span class="line">    <span class="keyword">int</span> vinPosition = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = vinStart; i &lt; vinEnd; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (vin[i] == pre[preStart]) &#123;</span><br><span class="line">        vinPosition = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> prePosition = preStart + vinPosition - vinStart;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>* <span class="title">node</span> = <span class="title">new</span> <span class="title">struct</span> <span class="title">TreeNode</span>(<span class="title">pre</span>[<span class="title">preStart</span>]);</span></span><br><span class="line">    node-&gt;left = R(pre, vin, preStart+<span class="number">1</span>, prePosition+<span class="number">1</span>, vinStart, vinPosition);</span><br><span class="line">    node-&gt;right = R(pre, vin, prePosition+<span class="number">1</span>, preEnd, vinPosition+<span class="number">1</span>, vinEnd);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>第五题：<br>此题较为简单。stack1储存，stack2给予，如果stack2为空时将stack1的点全部输入stack2即可。</p>
+<p>第六题：<br>旋转数组找最小成分。直观做法是线性扫描–&gt;37ms.<br>稍加观察，发现出现先第一个小于首位的数即为最小–&gt;32ms.</p>
+<p>第七题：<br>斐波那契数列。</p>
+<p>第八题：<br>斐波那契数列变种。$F(n) = F(n-1) + F(n-2)$</p>
+<p>第九题：<br>斐波那契数列变种。$F(n) = $\sum_{k=1}^n-1\F(k)+1$</p>
+<p>第九题：<br>斐波那契数列变种。$F(n) = F(n-1) + F(n-2)$</p>
+<p>第十题：<br>求二进制中1的个数。比较麻烦的是负数。有关负数补码，可以参考另一篇博客“原码，反码和补码”。</p>
 
           
         
@@ -647,7 +775,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
