@@ -242,6 +242,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/memory-in-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/27/memory-in-c/" itemprop="url">C/C++中的内存管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T23:00:28+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在了解内存管理之前，需要注意C语言中变量类型。<br>const：常数变量。static：静态变量。<br>局部变量（函数内部）。全局变量（非函数内部）。</p>
+<p><img src="5memory_area.png" alt><br>可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).<br>在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。<br>代码区：存放执行代码。有可能包含一些只读的常数变量。<br>数据区：存放已初始化全局变量，静态变量和常量数据。<br>未初始化数据区(BSS)：用来存放未初始化的全局变量。在程序运行时会对全部变量赋值0。<br>栈区(stack)：存放局部变量以及程序运行时需要的信息（包括函数调用返回地址，传递参数）。由系统自动静态分配。<br>堆区(heap)：由程序员分配释放。（malloc/free）。</p>
+<p>栈/堆区别：<br>栈由系统控制分配释放，硬件方面有相应的适配，故效率极高。高地址到低地址。<br>堆有程序员控制分配释放，在执行时可能会存在碎片，因此效率相对较低。低地址到高地址。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/true-complemental-ones-complemental-code/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -777,7 +899,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
