@@ -87,10 +87,12 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-28T16:23:50.615Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/architecture.png">
+<meta property="og:updated_time" content="2019-06-28T16:28:54.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="computer system">
 <meta name="twitter:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/28/computer-system/architecture.png">
 
 
 
@@ -353,7 +355,38 @@
 
       
         <p>Reference: comptuer system: a programmer’s perspective<br>Related course: <a href="https://ipads.se.sjtu.edu.cn/courses/ics/" target="_blank" rel="noopener">Introduction to computer systems</a></p>
-<p>chapter one: memory hierarchy<br>memory = RAM + ROM + Hard Disk<br>RAM = DRAM + SRAM<br>RAM is volatile memories -&gt; loss data if powered off<br>|category|transistor per bit|access time|persist|sensitive|cost     |applications |<br>|——–|——————|———–|——-|———|———|————-|<br>|SRAM    |6                 |fastest    |yes    |no       |expensive|cache        |<br>|DRAM    |1                 |fast       |no     |yes      |less exp |main memories|</p>
+<p>chapter one: memory hierarchy<br>memory = RAM + ROM + Hard Disk<br>RAM = DRAM + SRAM<br>RAM is volatile memories -&gt; loss data if powered off</p>
+<table>
+<thead>
+<tr>
+<th>category</th>
+<th>transistor per bit</th>
+<th>access time</th>
+<th>persist</th>
+<th>sensitive</th>
+<th>cost</th>
+<th>applications</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SRAM</td>
+<td>6</td>
+<td>fastest</td>
+<td>yes</td>
+<td>no</td>
+<td>expensive</td>
+<td>cache</td>
+</tr>
+<tr>
+<td>DRAM</td>
+<td>1</td>
+<td>fast</td>
+<td>no</td>
+<td>yes</td>
+<td>less exp</td>
+<td>main memories</td>
+</tr>
+</tbody></table>
 <p>ROM is nonvolatile memories<br>ROM:BIOS, graphics card, disk controllers</p>
 <p>Hard disk = several platters<br>platter = 2 surfaces<br>surface = multiple tracks<br>track = lots of sectors</p>
 <p>Access time = seek time (seek for track) + rotation time (wait for sector) + transfer time (data transfer)<br>Example: T = 9ms + 4ms + 0.02ms -&gt; seek time and rotation time dominate the access time.</p>
@@ -365,7 +398,7 @@
 <li>Disk controller send interrupt to cpu. (could be singal in pin or information on bus).</li>
 <li>CPU read from memory.</li>
 </ol>
-<p><a href="architecture.png"></a></p>
+<p><img src="architecture.png" alt></p>
 
       
     </div>
