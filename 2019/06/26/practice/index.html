@@ -86,7 +86,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Link: [https://www.nowcoder.com/ta/coding-interviews]第一题：看到题的直觉是用binary search。先用暴力搜索–&amp;gt;15ms + 1484k–&amp;gt;O(nm)对每一行预先判断首尾–&amp;gt;15ms + 1376k–&amp;gt;O(nm)binary search–&amp;gt;12 + 1504k–&amp;gt;O(n*logm)最后，发现矩阵整体">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-27T04:45:43.998Z">
+<meta property="og:updated_time" content="2019-06-28T07:06:57.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer">
 <meta name="twitter:description" content="Link: [https://www.nowcoder.com/ta/coding-interviews]第一题：看到题的直觉是用binary search。先用暴力搜索–&amp;gt;15ms + 1484k–&amp;gt;O(nm)对每一行预先判断首尾–&amp;gt;15ms + 1376k–&amp;gt;O(nm)binary search–&amp;gt;12 + 1504k–&amp;gt;O(n*logm)最后，发现矩阵整体">
@@ -328,6 +328,13 @@
 <p>第十题：<br>求二进制中1的个数。比较麻烦的是负数。有关负数补码，可以参考另一篇博客“原码，反码和补码”。<br>其实这道题还可以直接对bit操作，会简单很多。但是我觉得出题人的初衷是要考察对原反补码的理解。whatever。以下是相关代码。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">NumberOf1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag&amp;n) &#123;</span><br><span class="line">            res ++;</span><br><span class="line">        &#125;</span><br><span class="line">        tag = tag &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>第十一题：<br>快速幂，增大base来减少相乘的次数。详细算法可以参考“大数相乘以及快速幂”。<br>其实直接用写好的pow即可快速通过。</p>
+<p>第十二题：<br>方法一：bubble sort。左偶数右奇数-&gt;交换。O(n^2).<br>方法二：新建vector。扫描奇数，扫描偶数。O(n)。</p>
+<p>第十三题：<br>方法一：遍历，得到list的大小，再次遍历，找到size-k。<br>方法二：使用stack，全部存下，然后pop k次。<br>方法三：使用queue，如果queue大于k，pop。<br>比较：我个人最喜欢方法三，只需要一次遍历并且存下k个node。属于折中的方法。</p>
+<p>第十四题：<br>最简单的方法是使用stack存下全部node，然后再根据stack的顺序新建node。然而需要遍历两遍，且需要新建一个list。<br>也可以直接操作list，需要记录前，中，后三点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">ReverseList</span><span class="params">(ListNode* pHead)</span> </span>&#123;</span><br><span class="line">    ListNode* pre = <span class="literal">NULL</span>;</span><br><span class="line">    ListNode* current = <span class="literal">NULL</span>;</span><br><span class="line">    ListNode* post = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    current = pHead;</span><br><span class="line">    <span class="keyword">while</span> (current != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        post = current-&gt;next;</span><br><span class="line">        current-&gt;next = pre;</span><br><span class="line">        pre = current;</span><br><span class="line">        current = post;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第十五题：<br>较为简单，不做赘述。</p>
 
       
     </div>
@@ -434,7 +441,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="Checklist:[x] 英文简历[ ] 中文简历[ ] 剑指offer (C/C++)[ ] 暑期实习[ ] 扫雷[ ] 扫雷AI[ ] C++ 基础知识巩固[ ] JAVA 基础知识巩固{ ] Python 基础知识巩固{ ] 算法基础知识巩固[ ] 阅读深入了解计算机系统">
+<meta name="description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
 <meta property="og:type" content="article">
-<meta property="og:title" content="校招准备">
-<meta property="og:url" content="http://yoursite.com/2019/06/26/career-plan/index.html">
+<meta property="og:title" content="大数相乘以及快速幂">
+<meta property="og:url" content="http://yoursite.com/2019/06/28/bignumber/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="Checklist:[x] 英文简历[ ] 中文简历[ ] 剑指offer (C/C++)[ ] 暑期实习[ ] 扫雷[ ] 扫雷AI[ ] C++ 基础知识巩固[ ] JAVA 基础知识巩固{ ] Python 基础知识巩固{ ] 算法基础知识巩固[ ] 阅读深入了解计算机系统">
+<meta property="og:description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-26T12:19:29.972Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/28/bignumber/bidnumber.png">
+<meta property="og:updated_time" content="2019-06-28T04:25:41.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="校招准备">
-<meta name="twitter:description" content="Checklist:[x] 英文简历[ ] 中文简历[ ] 剑指offer (C/C++)[ ] 暑期实习[ ] 扫雷[ ] 扫雷AI[ ] C++ 基础知识巩固[ ] JAVA 基础知识巩固{ ] Python 基础知识巩固{ ] 算法基础知识巩固[ ] 阅读深入了解计算机系统">
+<meta name="twitter:title" content="大数相乘以及快速幂">
+<meta name="twitter:description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/28/bignumber/bidnumber.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/26/career-plan/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/28/bignumber/">
 
 
 
 
 
-  <title>校招准备 | </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>大数相乘以及快速幂 | </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -242,7 +244,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/career-plan/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/bignumber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李书赫">
@@ -259,7 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">校招准备</h1>
+          <h1 class="post-title" itemprop="name headline">大数相乘以及快速幂</h1>
         
 
         <div class="post-meta">
@@ -271,8 +273,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T16:26:32+08:00">
-                2019-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T11:59:52+08:00">
+                2019-06-28
               </time>
             
 
@@ -309,7 +311,13 @@
       
 
       
-        <p>Checklist:<br>[x] 英文简历<br>[ ] 中文简历<br>[ ] 剑指offer (C/C++)<br>[ ] 暑期实习<br>[ ] 扫雷<br>[ ] 扫雷AI<br>[ ] C++ 基础知识巩固<br>[ ] JAVA 基础知识巩固<br>{ ] Python 基础知识巩固<br>{ ] 算法基础知识巩固<br>[ ] 阅读深入了解计算机系统</p>
+        <p>宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。<br>如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&gt; 对每一位都要进行相乘运算。<br>另一个方法是karatsuba。<br><img src="bidnumber.png" alt><br>如图所示，基础思想为divide and conquer。<br>以下为c++代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_length</span><span class="params">(<span class="keyword">long</span> num)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		num /= <span class="number">10</span>;</span><br><span class="line">		length++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">karatsuba</span><span class="params">(<span class="keyword">long</span> x, <span class="keyword">long</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// x = a * 10^(length/2) + b</span></span><br><span class="line">	<span class="comment">// y = c * 10^(length/2) + d</span></span><br><span class="line">	<span class="comment">// x * y = ac * 10^length + bd + ((a + c)*(b + d) - ac - bd)*10^(length/2)</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (x &lt; <span class="number">10</span> &amp;&amp; y &lt; <span class="number">10</span>) <span class="keyword">return</span> x * y;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// calculate a b c d</span></span><br><span class="line">	<span class="keyword">int</span> length = max(get_length(x), get_length(y));</span><br><span class="line">	<span class="keyword">int</span> t = <span class="built_in">pow</span>(<span class="number">10</span>, length / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> a = x / t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> b = x - a * t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> c = y / t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> d = y - c * t;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// z1 = ac, z2 = bd, z3 = (a+c)*(b+d) - z1 - z2</span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z1 = karatsuba(a, c);</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z2 = karatsuba(b, d);</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z3 = karatsuba((a + b), (c + d)) - z1 - z2;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> z1 * t*t + z2 + z3 * t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在写代码的时候，发现使用long并不会扩张int的取值范围。于是去百度，发现，long的位数由编译器来确定，c语言只规定long位数不低于int。<br>而我使用的VC，把long定义为4字节，同int一样。</p>
+<p>快速幂：<br>求幂的时候，我们也可以用divide and conquer来缩短运算。如果把相乘看为O(1)，求N次幂显然需要O(N)次运算。<br>然而，我们可以让底数增大，这样相乘的次数就会减少。例如$2^4 = 2^2 * 2^2$.<br>于是，运算可以简化为O(logN)<br>以下是相应代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Power</span><span class="params">(<span class="keyword">double</span> base, <span class="keyword">int</span> exponent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">exp</span> = <span class="built_in">abs</span>(exponent);</span><br><span class="line">    <span class="keyword">double</span> res = <span class="number">1.0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">exp</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span> &amp; <span class="number">1</span>) res *= base;</span><br><span class="line">        base *= base;</span><br><span class="line">        <span class="built_in">exp</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> exponent &lt; <span class="number">0</span>? <span class="number">1</span>/res:res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -334,8 +342,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/26/Hello-World-0/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/06/27/memory-in-c/" rel="next" title="C/C++中的内存管理">
+                <i class="fa fa-chevron-left"></i> C/C++中的内存管理
               </a>
             
           </div>
@@ -343,10 +351,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/26/practice/" rel="prev" title="剑指offer">
-                剑指offer <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
