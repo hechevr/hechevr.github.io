@@ -262,6 +262,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/computer-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/28/computer-system/" itemprop="url">computer system</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T23:54:50+08:00">
+                2019-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Reference: comptuer system: a programmer’s perspective<br>Related course: <a href="https://ipads.se.sjtu.edu.cn/courses/ics/" target="_blank" rel="noopener">Introduction to computer systems</a></p>
+<p>chapter one: memory hierarchy<br>memory = RAM + ROM + Hard Disk<br>RAM = DRAM + SRAM<br>RAM is volatile memories -&gt; loss data if powered off<br>|category|transistor per bit|access time|persist|sensitive|cost     |applications |<br>|——–|——————|———–|——-|———|———|————-|<br>|SRAM    |6                 |fastest    |yes    |no       |expensive|cache        |<br>|DRAM    |1                 |fast       |no     |yes      |less exp |main memories|</p>
+<p>ROM is nonvolatile memories<br>ROM:BIOS, graphics card, disk controllers</p>
+<p>Hard disk = several platters<br>platter = 2 surfaces<br>surface = multiple tracks<br>track = lots of sectors</p>
+<p>Access time = seek time (seek for track) + rotation time (wait for sector) + transfer time (data transfer)<br>Example: T = 9ms + 4ms + 0.02ms -&gt; seek time and rotation time dominate the access time.</p>
+<p>I/O port: address reserved for the communication between cpu and I/O device.</p>
+<p>Routine for cpu access disk:</p>
+<ol>
+<li>cpu initiates a disk read by writing a command, logical block number and destination memory address to a port</li>
+<li>Disk controller reads sector and perform a DMA (no CPU) transfer into main memory(RAM).</li>
+<li>Disk controller send interrupt to cpu. (could be singal in pin or information on bus).</li>
+<li>CPU read from memory.</li>
+</ol>
+<p><a href="architecture.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/bignumber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1141,7 +1296,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1152,7 +1307,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1163,7 +1318,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
