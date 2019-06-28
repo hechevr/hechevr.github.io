@@ -442,6 +442,29 @@
             <p>在了解内存管理之前，需要注意C语言中变量类型。<br>const：常数变量。static：静态变量。<br>局部变量（函数内部）。全局变量（非函数内部）。</p>
 <p><img src="5memory_area.png" alt><br>可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).<br>在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。<br>代码区：存放执行代码。有可能包含一些只读的常数变量。<br>数据区：存放已初始化全局变量，静态变量和常量数据。<br>未初始化数据区(BSS)：用来存放未初始化的全局变量。在程序运行时会对全部变量赋值0。<br>栈区(stack)：存放局部变量以及程序运行时需要的信息（包括函数调用返回地址，传递参数）。由系统自动静态分配。<br>堆区(heap)：由程序员分配释放。（malloc/free）。</p>
 <p>栈/堆区别：<br>栈由系统控制分配释放，硬件方面有相应的适配，故效率极高。高地址到低地址。<br>堆有程序员控制分配释放，在执行时可能会存在碎片，因此效率相对较低。低地址到高地址。</p>
+<p>内存对齐：<br>不同平台对对内存空间处理上不同。一些平台对特定类型数据只能从特定地址开始存取。<br>内存对齐可以减少读取周期，增加效率。<br>有三条规则：</p>
+<ol>
+<li>对于结构体，成员偏移量(内存所在位置)应为当前成员类型整数倍。</li>
+<li>结构体所有数据成员对齐后，本身还要对齐，保证整个结构体占用内存大小是结构体最大数据成员的最小整数倍。</li>
+<li>#pragma pack(n) 预编译指令使得所有成员对齐以n字节为准，不考虑规则二。<br>举例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BU1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> number;             <span class="comment">//4字节</span></span><br><span class="line">    <span class="keyword">union</span> UBffer</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> buffer[<span class="number">13</span>];    <span class="comment">//填充3字节，该成员占16字节空间</span></span><br><span class="line">        <span class="keyword">double</span> number;</span><br><span class="line">    &#125;ubuf;</span><br><span class="line">    <span class="keyword">int</span> aa;                 <span class="comment">//占4字节空间,当前偏移量已补齐为24</span></span><br><span class="line">    <span class="keyword">double</span> dou;             <span class="comment">//占8字节空间</span></span><br><span class="line">&#125;bu;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>sizeof(BU1) = 4 + 4(补充) + 13 + 3(补充) + 4 + 8 + 4(补充)</p>
+<pre><code class="c"><span class="class"><span class="keyword">struct</span> <span class="title">BU2</span></span>
+<span class="class">{</span>
+    <span class="keyword">int</span> number;             <span class="comment">//4字节</span>
+    <span class="keyword">union</span> UBffer
+    {
+        <span class="keyword">char</span> buffer[<span class="number">13</span>];    <span class="comment">//填充3字节，该成员占16字节空间</span>
+        <span class="keyword">int</span> number;
+    }ubuf;
+    <span class="keyword">double</span> aa;                 <span class="comment">//占8字节空间,当前偏移量已补齐为24</span>
+    <span class="keyword">int</span> dou;             <span class="comment">//占4字节空间</span>
+}bu;</code></pre>
+<p>sizeof(BU2) = 4 + 13 + 7(补充) + 8 + 4 + 4(补充)</p>
+<p>注意，如果在代码首部加上#pragma pack(1)，sizeof(BU1) = 4 + 13 + 4 + 8, sizeof(BU2) = 4 + 13 + 8 + 4</p>
+<p>柔性数组机制，如果最后一个成员为数组，且大小为0，则该结构体大小不计算该数组。<br>C++中，struct本质上是public class，规定空类大小为1.<br>C中，空类大小为0.</p>
 
           
         
@@ -1040,6 +1063,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
