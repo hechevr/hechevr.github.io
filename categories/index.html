@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="在做题的时候遇到了相互转换的问题，于是在此做一个小结。原码，即为数直接转换为二进制后的编码。负数与正数的差别为负数最高为为1，正数为0.正数的反码和补码与原码相同。负数的反码为除最高位全部取反。负数的补码为反码加一。如：-5，原码1000 0101，反码1111 1010，补码1111 1011.-0，原码1000 0000，反码1111 1111，补码0000 0000. 127 原码0111">
-<meta property="og:type" content="article">
-<meta property="og:title" content="原码，反码，补码">
-<meta property="og:url" content="http://yoursite.com/2019/06/27/true-complemental-ones-complemental-code/index.html">
+<meta name="description" content="It works on my machine">
+<meta property="og:type" content="website">
+<meta property="og:title" content="分类">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="在做题的时候遇到了相互转换的问题，于是在此做一个小结。原码，即为数直接转换为二进制后的编码。负数与正数的差别为负数最高为为1，正数为0.正数的反码和补码与原码相同。负数的反码为除最高位全部取反。负数的补码为反码加一。如：-5，原码1000 0101，反码1111 1010，补码1111 1011.-0，原码1000 0000，反码1111 1111，补码0000 0000. 127 原码0111">
+<meta property="og:description" content="It works on my machine">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-27T04:44:39.349Z">
+<meta property="og:updated_time" content="2019-06-28T10:04:39.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原码，反码，补码">
-<meta name="twitter:description" content="在做题的时候遇到了相互转换的问题，于是在此做一个小结。原码，即为数直接转换为二进制后的编码。负数与正数的差别为负数最高为为1，正数为0.正数的反码和补码与原码相同。负数的反码为除最高位全部取反。负数的补码为反码加一。如：-5，原码1000 0101，反码1111 1010，补码1111 1011.-0，原码1000 0000，反码1111 1111，补码0000 0000. 127 原码0111">
+<meta name="twitter:title" content="分类">
+<meta name="twitter:description" content="It works on my machine">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/27/true-complemental-ones-complemental-code/">
+  <link rel="canonical" href="http://yoursite.com/categories/">
 
 
 
 
 
-  <title>原码，反码，补码 | </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>分类 | </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -250,144 +250,40 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/true-complemental-ones-complemental-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李书赫">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content>
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">原码，反码，补码</h1>
-        
+	<h1 class="post-title" itemprop="name headline">分类</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T11:32:47+08:00">
-                2019-06-27
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>在做题的时候遇到了相互转换的问题，于是在此做一个小结。<br>原码，即为数直接转换为二进制后的编码。负数与正数的差别为负数最高为为1，正数为0.<br>正数的反码和补码与原码相同。负数的反码为除最高位全部取反。负数的补码为反码加一。<br>如：<br>-5，原码1000 0101，反码1111 1010，补码1111 1011.<br>-0，原码1000 0000，反码1111 1111，补码0000 0000.</p>
-<p>127 原码0111 1111，反码0111 1111，补码0111 1111.<br>-127 原码1111 1111，反码1000 0000，补码1000 0001.<br>我们发现，1000 0000这个状态没有使用。如果我们把它当作补码。<br>最高位为1，所以是负数，相应的反码0111 1111. 相应的原码1000 0000.<br>所以，1000 0000可以表示-128的补码。</p>
-<p>因此，int（32位）取值范围为$-2^{32-1} – (2^{32-1}-1)$</p>
-
+      <div class="post-body">
+        
+        
+          <div class="category-all-page">
+            <div class="category-all-title">
+                目前共计 4 个分类
+            </div>
+            <div class="category-all">
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/剑指offer/">剑指offer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识/">基础知识</a><span class="category-list-count">2</span></li></ul>
+            </div>
+          </div>
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/06/26/practice/" rel="next" title="剑指offer">
-                <i class="fa fa-chevron-left"></i> 剑指offer
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/27/memory-in-c/" rel="prev" title="C/C++中的内存管理">
-                C/C++中的内存管理 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
