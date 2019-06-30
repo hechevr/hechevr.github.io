@@ -88,7 +88,7 @@
 <meta property="og:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/architecture.png">
-<meta property="og:updated_time" content="2019-06-28T16:28:54.956Z">
+<meta property="og:updated_time" content="2019-06-29T15:49:25.356Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="computer system">
 <meta name="twitter:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
@@ -399,6 +399,15 @@
 <li>CPU read from memory.</li>
 </ol>
 <p><img src="architecture.png" alt></p>
+<p>SSD:<br>SSD stands for Solid State Disk. It is a storage technology based on flash memory.<br>Charasteristic of SSD: </p>
+<ol>
+<li>Data read/write in units of pages(pages form block)</li>
+<li>Page can be written only after the blocks are erased.</li>
+<li>Could be wears out.</li>
+<li>No moving part-&gt;faster, less power.</li>
+</ol>
+<p>The gap between the speed of CPU and memory is widthen. We use locality and memory hierarchy to decrease the time of memory process.<br>Locality: Pragrams tend to use data and instructions with address near or equal to those they have used recently.<br>Temporal locality: recently used.<br>Spatial locality: nearby.</p>
+<p>![](memory_hierarchy]<br>Memory hierarchy: Register-&gt;L1, L2, L3 cache(SRAM)-&gt;Main memory(DRAM)-&gt;Local disks.<br>Low level memory serves as caches for high level memory.<br>Because of the locality, hierarchy memory could be a good solution for fasten the progress on memory.</p>
 
       
     </div>
