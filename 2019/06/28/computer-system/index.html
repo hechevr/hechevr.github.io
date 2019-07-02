@@ -88,7 +88,8 @@
 <meta property="og:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/architecture.png">
-<meta property="og:updated_time" content="2019-06-29T15:49:25.356Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/cpu_architecture.jpg">
+<meta property="og:updated_time" content="2019-07-02T16:16:31.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="computer system">
 <meta name="twitter:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems chapter one: memory hierarchymemory = RAM + ROM + Hard DiskRAM = DRAM + SRAMRAM is volatile memor">
@@ -407,7 +408,19 @@
 <li>No moving part-&gt;faster, less power.</li>
 </ol>
 <p>The gap between the speed of CPU and memory is widthen. We use locality and memory hierarchy to decrease the time of memory process.<br>Locality: Pragrams tend to use data and instructions with address near or equal to those they have used recently.<br>Temporal locality: recently used.<br>Spatial locality: nearby.</p>
-<p>![](memory_hierarchy]<br>Memory hierarchy: Register-&gt;L1, L2, L3 cache(SRAM)-&gt;Main memory(DRAM)-&gt;Local disks.<br>Low level memory serves as caches for high level memory.<br>Because of the locality, hierarchy memory could be a good solution for fasten the progress on memory.</p>
+<p>![](memory_hierarchy.png]<br>Memory hierarchy: Register-&gt;L1, L2, L3 cache(SRAM)-&gt;Main memory(DRAM)-&gt;Local disks.<br>Low level memory serves as caches for high level memory.<br>Because of the locality, hierarchy memory could be a good solution for fasten the progress on memory.</p>
+<p>Generic Cache memory organization:<br>cache = sets = valid(1bit) + tag(block index in physical memory) + blocks<br>physical address = tag(block index) + set index + block offset</p>
+<p>physical address -&gt; cache:<br>select set -&gt; Line matching(valid number, tag) -&gt; word extraction(according to block offset)</p>
+<p>Read:</p>
+<p>conflict-&gt;same cache lines will be filled by different physical address multiple times.</p>
+<p>Why using middle bits as index? the middle bits will make the physical memory caches mapping more fluent. Consecutive memory lines map to different caches lines.</p>
+<p>To find the lines in same set. Using tags.</p>
+<p>The physical memory will only determine which sets will be used. If all the lines in the same sets are filled, which line will be evicted?<br>LFU: least frequently used.<br>LRU: least recently used.</p>
+<p>Set associative caches: several sets. each set contains several lines.<br>Fully associative caches: one sets. contain all the lines.</p>
+<p>Write:<br>Modern Implementation: write back, write allocate<br>write through: cpu write into caches and copy data from caches into memory.<br>write back: cpu write into caches, copy data into memory only if the caches will be evicted.<br>write allocate: land the corrend memory block into cache, then updates the cache block.<br>no-write-allocate: bypass the cache and write toe word directly memory.</p>
+<p>Miss rate: memory not found in cache. 3-10% for L1. can be small for L2.<br>Hit rate: fraction of memory found in cache(1-Miss rage).<br>Hit time: time to deliver a line in the cache to processor.<br>Miss Penalty: additional time required because of a miss.</p>
+<p>How to write cache-frendly code? better locality. lower miss rates.<br>Temporal locality: repeated references to local variables-&gt;compiler will cache the data in register.<br>Spatial locality: stride-1 references patterns-&gt;contiguous blocks will be stored in caches.</p>
+<p><img src="cpu_architecture.jpg" alt></p>
 
       
     </div>
