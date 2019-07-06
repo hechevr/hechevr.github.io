@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/cpu_architecture.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/os_abstractions.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/28/computer-system/fault.png">
-<meta property="og:updated_time" content="2019-07-03T08:50:57.214Z">
+<meta property="og:updated_time" content="2019-07-04T15:46:35.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="computer system">
 <meta name="twitter:description" content="Reference: comptuer system: a programmer’s perspectiveRelated course: Introduction to computer systems Memory hierarchymemory = RAM + ROM + Hard Disk RAMRAM = DRAM + SRAMRAM is volatile memories -&amp;gt;">
@@ -446,6 +446,55 @@
 <p>For case 1, the OS will send SIGSEG to the process and terminate the process. Thus unrecoverable.<br>For case2, case 3, the OS will do the corresponding handle and return the instructions points. Thus the instruction will do again.</p>
 <h6 id="aborts"><a href="#aborts" class="headerlink" title="aborts"></a>aborts</h6><p>unintentional and unrecoverable. parity error.</p>
 <h5 id="Asynchronous-exceptions"><a href="#Asynchronous-exceptions" class="headerlink" title="Asynchronous exceptions"></a>Asynchronous exceptions</h5><p>caused by events external to the processor.<br>Examples: 1. IO interrupts(ctrl-c). 2. hard reset interrupt(reset button). 3. soft reset interrupt(ctrl-alt-delete).<br><img src="fault.png" alt></p>
+<h3 id="process"><a href="#process" class="headerlink" title="process"></a>process</h3><p>scheduler(parts of kernel) will do following things.</p>
+<ol>
+<li>decides whether to preempt the current process</li>
+<li>selects a previously preempted process</li>
+<li>preempts the current process</li>
+<li>restart the scheduled process</li>
+</ol>
+<p>In order to restart the preempted process, context need to be stored.<br>context contains: </p>
+<ol>
+<li>cpu (register, value, status)</li>
+<li>kernel (environment valiables, process table, page table, file table)</li>
+<li>memory (user’s stack, kernel’s stack, code, data)</li>
+</ol>
+<p>context switch:</p>
+<ol>
+<li>system call(read, sleep)</li>
+<li>timer interrupt (scheduler)</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>process status</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stop</td>
+<td>receiving a signal(SIGSTOP, SIGTSTP, SITTTIN, SIGTTOU)</td>
+</tr>
+<tr>
+<td>running</td>
+<td>receiving a SIGCONT</td>
+</tr>
+<tr>
+<td>terminated</td>
+<td>exit(), return from main, signal</td>
+</tr>
+</tbody></table>
+<p>fork(void): return 0 to child, PID to parent, -1 for error.<br>clone all the data in parent process except pid.</p>
+<p>two process can share files for communicate. (stdout)</p>
+<h4 id="Zombie"><a href="#Zombie" class="headerlink" title="Zombie"></a>Zombie</h4><p>A terminated child process will become zombie if the parent has not reaped.<br>If the parent process has be terminated, kernel will assign init (pid=1) to reap them.</p>
+<p>Zombie will consume system memory resources -&gt; always reap zombies.</p>
+<h4 id="Process-related-API"><a href="#Process-related-API" class="headerlink" title="Process related API"></a>Process related API</h4><p>pid_t waitpid(pid_t pid, int *status, int options);<br>pid_t wait(int *status);</p>
+<p>if pid &gt; 0, the process will wait for specific child.<br>if pid = -1, the process will wait any child.<br>if there is no children, return -1. errno=ECHILD(the process has no child), errno=(EINTR)interrupted by a signal.<br>options = 0. </p>
+<p>unsigned int sleep(unsigned int secs);<br>int pause(void);</p>
+<p>int execve(const char* filename, const char* argv[], const char* envp[]);<br>if something wrong, return -1. otherwise, never return.<br>The new program will use the same process resource. The running stack will be replaced.</p>
+<h4 id="unix-shell"><a href="#unix-shell" class="headerlink" title="unix shell"></a>unix shell</h4><p>application level program.<br>compare: kernel is the core of OS whoes jobs are managing the hardware resource. </p>
+<p>variants of shell: bash, sh, csh, tcsh.</p>
+<p>performs a sequence of read/evaluate steps and terminate. read: reads a command line. evalute: parse the command line and runs programs.</p>
 
       
     </div>
@@ -622,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-hierarchy"><span class="nav-number">1.</span> <span class="nav-text">Memory hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RAM"><span class="nav-number">1.1.</span> <span class="nav-text">RAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROM"><span class="nav-number">1.2.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSD"><span class="nav-number">1.3.</span> <span class="nav-text">SSD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Read"><span class="nav-number">2.</span> <span class="nav-text">Read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Write"><span class="nav-number">3.</span> <span class="nav-text">Write</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linking"><span class="nav-number">4.</span> <span class="nav-text">Linking</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Linking"><span class="nav-number">4.1.</span> <span class="nav-text">Static Linking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-linking"><span class="nav-number">4.2.</span> <span class="nav-text">Dynamic linking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Executable-and-linkable-format"><span class="nav-number">4.3.</span> <span class="nav-text">Executable and linkable format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Command-in-GCC"><span class="nav-number">4.4.</span> <span class="nav-text">Command in GCC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operating-system"><span class="nav-number">5.</span> <span class="nav-text">Operating system</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classes-of-exceptions"><span class="nav-number">5.1.</span> <span class="nav-text">classes of exceptions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronous-exceptions"><span class="nav-number">5.1.1.</span> <span class="nav-text">synchronous exceptions</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#traps"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">traps</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#faults"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">faults</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#aborts"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">aborts</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Asynchronous-exceptions"><span class="nav-number">5.1.2.</span> <span class="nav-text">Asynchronous exceptions</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-hierarchy"><span class="nav-number">1.</span> <span class="nav-text">Memory hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RAM"><span class="nav-number">1.1.</span> <span class="nav-text">RAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROM"><span class="nav-number">1.2.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSD"><span class="nav-number">1.3.</span> <span class="nav-text">SSD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Read"><span class="nav-number">2.</span> <span class="nav-text">Read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Write"><span class="nav-number">3.</span> <span class="nav-text">Write</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linking"><span class="nav-number">4.</span> <span class="nav-text">Linking</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Linking"><span class="nav-number">4.1.</span> <span class="nav-text">Static Linking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-linking"><span class="nav-number">4.2.</span> <span class="nav-text">Dynamic linking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Executable-and-linkable-format"><span class="nav-number">4.3.</span> <span class="nav-text">Executable and linkable format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Command-in-GCC"><span class="nav-number">4.4.</span> <span class="nav-text">Command in GCC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operating-system"><span class="nav-number">5.</span> <span class="nav-text">Operating system</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classes-of-exceptions"><span class="nav-number">5.1.</span> <span class="nav-text">classes of exceptions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronous-exceptions"><span class="nav-number">5.1.1.</span> <span class="nav-text">synchronous exceptions</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#traps"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">traps</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#faults"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">faults</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#aborts"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">aborts</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Asynchronous-exceptions"><span class="nav-number">5.1.2.</span> <span class="nav-text">Asynchronous exceptions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#process"><span class="nav-number">6.</span> <span class="nav-text">process</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zombie"><span class="nav-number">6.1.</span> <span class="nav-text">Zombie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Process-related-API"><span class="nav-number">6.2.</span> <span class="nav-text">Process related API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unix-shell"><span class="nav-number">6.3.</span> <span class="nav-text">unix shell</span></a></li></ol></li></ol></div>
             
 
           </div>
