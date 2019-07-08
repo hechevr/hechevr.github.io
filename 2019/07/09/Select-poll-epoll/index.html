@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="读书笔记,">
 
 
 
@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="Checklist:   英文简历  中文简历  剑指offer (C/C++)  暑期实习  扫雷  扫雷AI  Search Engine  C++ 基础知识巩固  JAVA 基础知识巩固  Python 基础知识巩固  算法基础知识巩固  阅读深入了解计算机系统  C++ primer  数据库">
+<meta name="description" content="Select 1int select(int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout);  监控三组descriptor。并且block进程，如果有descriptor数据就绪，则返回。使用时需要遍历descriptor list。缺点：  每次调用select，需要把f">
+<meta name="keywords" content="读书笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="校招准备">
-<meta property="og:url" content="http://yoursite.com/2019/06/26/career-plan/index.html">
+<meta property="og:title" content="Select_poll_epoll">
+<meta property="og:url" content="http://yoursite.com/2019/07/09/Select-poll-epoll/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="Checklist:   英文简历  中文简历  剑指offer (C/C++)  暑期实习  扫雷  扫雷AI  Search Engine  C++ 基础知识巩固  JAVA 基础知识巩固  Python 基础知识巩固  算法基础知识巩固  阅读深入了解计算机系统  C++ primer  数据库">
+<meta property="og:description" content="Select 1int select(int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout);  监控三组descriptor。并且block进程，如果有descriptor数据就绪，则返回。使用时需要遍历descriptor list。缺点：  每次调用select，需要把f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-05T02:32:42.182Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/Select-poll-epoll/select.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/Select-poll-epoll/select_poll_epoll.png">
+<meta property="og:updated_time" content="2019-07-08T16:33:05.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="校招准备">
-<meta name="twitter:description" content="Checklist:   英文简历  中文简历  剑指offer (C/C++)  暑期实习  扫雷  扫雷AI  Search Engine  C++ 基础知识巩固  JAVA 基础知识巩固  Python 基础知识巩固  算法基础知识巩固  阅读深入了解计算机系统  C++ primer  数据库">
+<meta name="twitter:title" content="Select_poll_epoll">
+<meta name="twitter:description" content="Select 1int select(int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout);  监控三组descriptor。并且block进程，如果有descriptor数据就绪，则返回。使用时需要遍历descriptor list。缺点：  每次调用select，需要把f">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/09/Select-poll-epoll/select.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/26/career-plan/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/09/Select-poll-epoll/">
 
 
 
 
 
-  <title>校招准备 | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Select_poll_epoll | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -262,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/career-plan/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/Select-poll-epoll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李书赫">
@@ -279,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">校招准备</h1>
+          <h1 class="post-title" itemprop="name headline">Select_poll_epoll</h1>
         
 
         <div class="post-meta">
@@ -291,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T16:26:32+08:00">
-                2019-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T00:09:55+08:00">
+                2019-07-09
               </time>
             
 
@@ -329,23 +333,27 @@
       
 
       
-        <p>Checklist:</p>
-<ul>
-<li><input checked disabled type="checkbox"> 英文简历</li>
-<li><input disabled type="checkbox"> 中文简历</li>
-<li><input disabled type="checkbox"> 剑指offer (C/C++)</li>
-<li><input disabled type="checkbox"> 暑期实习</li>
-<li><input disabled type="checkbox"> 扫雷</li>
-<li><input disabled type="checkbox"> 扫雷AI</li>
-<li><input disabled type="checkbox"> Search Engine</li>
-<li><input disabled type="checkbox"> C++ 基础知识巩固</li>
-<li><input disabled type="checkbox"> JAVA 基础知识巩固</li>
-<li><input disabled type="checkbox"> Python 基础知识巩固</li>
-<li><input disabled type="checkbox"> 算法基础知识巩固</li>
-<li><input disabled type="checkbox"> 阅读深入了解计算机系统</li>
-<li><input disabled type="checkbox"> C++ primer</li>
-<li><input disabled type="checkbox"> 数据库</li>
-</ul>
+        <h3 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h3><p><img src="select.png" alt></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>监控三组descriptor。并且block进程，如果有descriptor数据就绪，则返回。<br>使用时需要遍历descriptor list。<br>缺点：</p>
+<ol>
+<li>每次调用select，需要把fd集合从用户空间拷贝到kernel，开销会随着fd增多而增大。</li>
+<li>调用select都需要在内核便利传递来的所有fd，开销会随着fd增多增大。</li>
+<li>支持文件描述符数量较小。</li>
+</ol>
+<h3 id="Poll"><a href="#Poll" class="headerlink" title="Poll"></a>Poll</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd* fds, <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>相对于select的优点：</p>
+<ol>
+<li>集合了所有descriptor。</li>
+<li>没有文件描述符数量的限制。<br>缺点：在fds很大时效率很低。和select没有本质区别。</li>
+</ol>
+<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event* events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event* event)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>每次注册新事件时，会把所有的fd拷贝进内核，因此，每个fd在整个过程中会被拷贝一次。<br>在epoll_ctl时会把current遍历一遍，为每一个fd制定回调函数。当设备就绪时，回调函数会被call（把就绪的fd加入就绪链表）。<br>epoll_wait的工作是查看就绪链表，因此不需要每次新设备出现时都便利fd。</p>
+<p>mmap：内存映射文件。文件磁盘地址和进程虚拟地址空间中一段虚拟地址一一对应。内核空间对文件的修改直接反应用户空间，可以实现不同进程间的文件共享。<br>epoll就用了mmap，所以速度会快一些。</p>
+<p><img src="select_poll_epoll.png" alt></p>
 
       
     </div>
@@ -361,6 +369,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
 
       
       
@@ -370,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/26/Hello-World-0/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/07/03/project/" rel="next" title="project">
+                <i class="fa fa-chevron-left"></i> project
               </a>
             
           </div>
@@ -379,10 +393,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/26/practice/" rel="prev" title="剑指offer">
-                剑指offer <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -434,8 +444,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -497,6 +516,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Select"><span class="nav-number">1.</span> <span class="nav-text">Select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Poll"><span class="nav-number">2.</span> <span class="nav-text">Poll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll"><span class="nav-number">3.</span> <span class="nav-text">epoll</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
