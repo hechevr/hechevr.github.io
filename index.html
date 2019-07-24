@@ -262,6 +262,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/reactor-nodejs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="404 Not Found">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/13/reactor-nodejs/" itemprop="url">reactor模型和nodejs的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T10:47:03+08:00">
+                2019-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="reactor"><a href="#reactor" class="headerlink" title="reactor"></a>reactor</h2><h3 id="同步，异步，阻塞，非阻塞"><a href="#同步，异步，阻塞，非阻塞" class="headerlink" title="同步，异步，阻塞，非阻塞"></a>同步，异步，阻塞，非阻塞</h3><p>Synchronous IO: operatins causes the requesting process to be blocked until that io operation completes.<br>Asychronrous IO: operations that does not cause the requesting process to be blocked.<br>阻塞：程序会自己挂起等待结果。<br>非阻塞：如果数据没有准备好，程序不关系结果直接返回。需要程序自己回去检查数据是否就绪。</p>
+<p>简单来讲，同步针对的是程序和kernel的通信。如果一个操作会返回结果（数据准备好或者没准备好），那么这个call就是同步的。反之，如果一个call不返回结果（我不知道数据怎么样，需要kernel自己回调函数），那么这个call就是异步的。<br>所以，同步可以阻塞也可以非阻塞，看程序本身如何应对返回结果（是直接从kernel拷贝数据还是先返回）。<br>异步只能非阻塞（因为异步表示kernel会将所有东西准备好然后回调函数，所以不存在call需要等待的情况）。</p>
+<p>如果一个call需要自己去查询数据是否就绪，则一定为同步（epoll很tricky，虽然运用了callback，但仍旧需要epoll_wait去检查，所以是同步的）<br>select/poll/epoll都是同步。<br>如果epoll_wait(timeout)timeout=-1，阻塞（知道捕获到信号）。timeout=0，非阻塞，直接返回。timeout&gt;0阻塞n毫秒。</p>
+<p>总结，IO call分为两步</p>
+<ol>
+<li>询问数据是否就绪。</li>
+<li>将数据从kernal拷贝到进程。<br>同步异步针对两个步骤，任何一个阻塞，都为同步。<br>阻塞非阻塞针对步骤1，步骤二不理会。</li>
+</ol>
+<h3 id="reactor的特点"><a href="#reactor的特点" class="headerlink" title="reactor的特点"></a>reactor的特点</h3><ol>
+<li>事件驱动</li>
+<li>处理多个输入源</li>
+<li>通过service handler同步的将输入事件（event）采用多路复用（select/poll/epoll）分发给相应的request handler同步的将输入事件（event）采用多路复用（select/poll/epoll）分发给相应的request handler处理。</li>
+</ol>
+<p>单线程reactor：一个线程来处理连接，读写，计算。消息的处理被放到独立的handler中。<br><img src="reactor_single.png" alt></p>
+<p><img src="reactor_multi.png" alt><br>多线程reactor：为handler开启不同的县城。</p>
+<p><img src="reactor.png" alt><br>主从reactor模型：main reactor针对连接，subreactor针对io操作。</p>
+<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p><img src="nodejs_framework.png" alt><br>由上图可知，nodejs包括顶层的javascript（程序员层面）和底层的V8, libuv（底层io实现）。<br>JS层面，程序是同步阻塞单线程的。如果语句出现问题，则整个程序卡住。<br>事件循环函数会不断检查事件队列中有没有需要处理的时间，直到程序结束。此循环对开发者不可见，由libuv实现。<br>libuv是一个底层的用c实现的异步io库。通过主线程检查事件队列，线程池来处理不同handler。</p>
+<p>nodejs编写简单，处理并发时有独特的优势。然而，当某需求需要在js上大量的cpu计算时，单线程的劣势就体现出来了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/Select-poll-epoll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -788,7 +925,7 @@
 <h4 id="standard-IO"><a href="#standard-IO" class="headerlink" title="standard IO"></a>standard IO</h4><p>C standard library (libc.so). high level standard io.<br>abstract open files as streams -&gt; file descriptor and a buffer.<br>stdin(fd=0)<br>stdout(fd=1)<br>stderr(fd=2)<br>Similar to RIO.</p>
 <pre><code>|Unix IO|standard io</code></pre><p>—–|——-|———–<br>prons|general, lowest over head. Metadata, async-signal-safe|efficiency. automatically short counts<br>cons |Shord counts is tricky and error prone. inefficient   |no metadata. not async-signal-safe. not good for network sockets</p>
 <p>note: standard IO require fflush/fseek/fsetpos/rewind between write and read.</p>
-
+<h3 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h3>
           
         
       
@@ -1878,7 +2015,7 @@ case3. e (float E integer)</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
