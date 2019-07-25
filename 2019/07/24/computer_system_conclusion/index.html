@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="读书笔记,">
 
 
 
@@ -79,19 +79,18 @@
 
 
 
-<meta name="description" content="在了解内存管理之前，需要注意C语言中变量类型。const：常数变量。static：静态变量。局部变量（函数内部）。全局变量（非函数内部）。 可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。代码区：存放执行代码。有可能包含一些只读的常数变量。">
+<meta name="description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
+<meta name="keywords" content="读书笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C&#x2F;C++中的内存管理">
-<meta property="og:url" content="http://yoursite.com/2019/06/27/memory-in-c/index.html">
+<meta property="og:title" content="计算机系统总结">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/computer_system_conclusion/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="在了解内存管理之前，需要注意C语言中变量类型。const：常数变量。static：静态变量。局部变量（函数内部）。全局变量（非函数内部）。 可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。代码区：存放执行代码。有可能包含一些只读的常数变量。">
+<meta property="og:description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/06/27/memory-in-c/5memory_area.png">
-<meta property="og:updated_time" content="2019-06-28T10:06:57.912Z">
+<meta property="og:updated_time" content="2019-07-25T15:07:41.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C&#x2F;C++中的内存管理">
-<meta name="twitter:description" content="在了解内存管理之前，需要注意C语言中变量类型。const：常数变量。static：静态变量。局部变量（函数内部）。全局变量（非函数内部）。 可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。代码区：存放执行代码。有可能包含一些只读的常数变量。">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/27/memory-in-c/5memory_area.png">
+<meta name="twitter:title" content="计算机系统总结">
+<meta name="twitter:description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
 
 
 
@@ -121,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/27/memory-in-c/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/computer_system_conclusion/">
 
 
 
 
 
-  <title>C/C++中的内存管理 | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>计算机系统总结 | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -264,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/memory-in-c/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/computer_system_conclusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李书赫">
@@ -281,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C/C++中的内存管理</h1>
+          <h1 class="post-title" itemprop="name headline">计算机系统总结</h1>
         
 
         <div class="post-meta">
@@ -293,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T23:00:28+08:00">
-                2019-06-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T23:22:43+08:00">
+                2019-07-24
               </time>
             
 
@@ -303,28 +302,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -353,32 +330,14 @@
       
 
       
-        <p>在了解内存管理之前，需要注意C语言中变量类型。<br>const：常数变量。static：静态变量。<br>局部变量（函数内部）。全局变量（非函数内部）。</p>
-<p><img src="5memory_area.png" alt><br>可执行文件(exe)文件中储存在disk时，可以分为代码区(code area)，数据区(data area)，未初始化数据区(BSS).<br>在执行时，在系统内存中会另外生成栈区(stack)和堆区(heap)。<br>代码区：存放执行代码。有可能包含一些只读的常数变量。<br>数据区：存放已初始化全局变量，静态变量和常量数据。<br>未初始化数据区(BSS)：用来存放未初始化的全局变量。在程序运行时会对全部变量赋值0。<br>栈区(stack)：存放局部变量以及程序运行时需要的信息（包括函数调用返回地址，传递参数）。由系统自动静态分配。<br>堆区(heap)：由程序员分配释放。（malloc/free）。</p>
-<p>栈/堆区别：<br>栈由系统控制分配释放，硬件方面有相应的适配，故效率极高。高地址到低地址。<br>堆有程序员控制分配释放，在执行时可能会存在碎片，因此效率相对较低。低地址到高地址。</p>
-<p>内存对齐：<br>不同平台对对内存空间处理上不同。一些平台对特定类型数据只能从特定地址开始存取。<br>内存对齐可以减少读取周期，增加效率。<br>有三条规则：</p>
+        <p>抽空把深入了解计算机系统简要看了一遍。这里做个小总结。</p>
+<h3 id="计算机系统的基本特性"><a href="#计算机系统的基本特性" class="headerlink" title="计算机系统的基本特性"></a>计算机系统的基本特性</h3><p>并发，共享，虚拟，异步。<br>并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。<br>共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。<br>虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程序享用的虚拟地址，这样每个进程都仿佛独占内存。<br>异步。同步异步是一个重要的区分特性。同步指几个进程指令需要有先后的执行，如操作一必须在操作二完成后开始执行。而异步指的是进程以不可预知的速度向前推进。每个进程何时执行，合适暂停，以何样的速度推进都是不可预知的。（好像和我理解的异步有点不一样）</p>
+<h3 id="操作系统的主要功能"><a href="#操作系统的主要功能" class="headerlink" title="操作系统的主要功能"></a>操作系统的主要功能</h3><p>进程控制，进程同步，进程通信，调度。<br>临界资源：一次只能宫一个进程访问的资源。临界区：访问临界区的程序。当一个进程进入临界区时，其他进程无法进入临界区。<br>对临界区加锁可以实现互斥。mutex和semphore都可以充当锁子。<br>进程同步指的是在异步环境下一组并发进程通过相互发送消息进行互相合作，互相等待，使得各自进程按照一定速度执行的过程。<br>进程通信：进程间通信有五种方式，分别是pipe，FIFO，signal，semaphore，共享内存。<br>pipe：单向，有亲缘，只存在于内存中（通过read，write读写）。<br>FIFO：命名管道，无关进程也可以交换数据。以文件形式存在文件系统中。<br>signal：消息链接表，存放在内核中。根据优先级来确定先后，独立于发送接收进程（进程终止，队列仍旧存在），可以实现随机查询，无关次序。<br>semaphore：计数器。P：wait until &gt; 0，semaphore-=1；V：semaphore+=1。用于进程同步，原子操作（即只存在执行或不执行，没有中间状态）。<br>共享内存：最快的通信方式。在内存中开辟一块供多个进程操作。需要配合semaphore。<br>操作系统的任务调度：FIFO(FCFS)，SJF(Shortest job first)，Round Robin，多层反馈队列，高响应比优先调度。<br>Round Robin：每个就绪进程获得一小段CPU时间，时间段用完后，进程交出cpu，重新回到就绪队列，等待下一次分配。<br>多层反馈队列：将任务分配到不同优先级的队列中。有以下几个规则。</p>
 <ol>
-<li>对于结构体，成员偏移量(内存所在位置)应为当前成员类型整数倍。</li>
-<li>结构体所有数据成员对齐后，本身还要对齐，保证整个结构体占用内存大小是结构体最大数据成员的最小整数倍。</li>
-<li>#pragma pack(n) 预编译指令使得所有成员对齐以n字节为准，不考虑规则二。<br>举例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BU1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> number;             <span class="comment">//4字节</span></span><br><span class="line">    <span class="keyword">union</span> UBffer</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> buffer[<span class="number">13</span>];    <span class="comment">//填充3字节，该成员占16字节空间</span></span><br><span class="line">        <span class="keyword">double</span> number;</span><br><span class="line">    &#125;ubuf;</span><br><span class="line">    <span class="keyword">int</span> aa;                 <span class="comment">//占4字节空间,当前偏移量已补齐为24</span></span><br><span class="line">    <span class="keyword">double</span> dou;             <span class="comment">//占8字节空间</span></span><br><span class="line">&#125;bu;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>开始时所有任务都是最高优先级。2. 如果任务在规定时间片中没有执行完毕（没有block）则将他下放到下一个优先级。3.每隔一段时间，重新分配优先级（即将所有任务放到最高级中）。<br>高响应比优先调度。对每一个就绪进程计算相应比，执行最高的那个。相应比=（等待时间+执行时间）/执行时间</li>
 </ol>
-<p>sizeof(BU1) = 4 + 4(补充) + 13 + 3(补充) + 4 + 8 + 4(补充)</p>
-<pre><code class="c"><span class="class"><span class="keyword">struct</span> <span class="title">BU2</span></span>
-<span class="class">{</span>
-    <span class="keyword">int</span> number;             <span class="comment">//4字节</span>
-    <span class="keyword">union</span> UBffer
-    {
-        <span class="keyword">char</span> buffer[<span class="number">13</span>];    <span class="comment">//填充3字节，该成员占16字节空间</span>
-        <span class="keyword">int</span> number;
-    }ubuf;
-    <span class="keyword">double</span> aa;                 <span class="comment">//占8字节空间,当前偏移量已补齐为24</span>
-    <span class="keyword">int</span> dou;             <span class="comment">//占4字节空间</span>
-}bu;</code></pre>
-<p>sizeof(BU2) = 4 + 13 + 7(补充) + 8 + 4 + 4(补充)</p>
-<p>注意，如果在代码首部加上#pragma pack(1)，sizeof(BU1) = 4 + 13 + 4 + 8, sizeof(BU2) = 4 + 13 + 8 + 4</p>
-<p>柔性数组机制，如果最后一个成员为数组，且大小为0，则该结构体大小不计算该数组。<br>C++中，struct本质上是public class，规定空类大小为1.<br>C中，空类大小为0.</p>
+<h3 id="线程与进程"><a href="#线程与进程" class="headerlink" title="线程与进程"></a>线程与进程</h3><p>进程是系统分配资源和调度的基本单位。当一个程序要执行时，系统会建立进程并为其分配资源。<br>线程是进程的一个实体。一个进程可以有一个或多个线程。线程自己不拥有资源，但是可以对进程的资源进行操作。<br>线程之间可以共享的部分：数据段，代码段，堆，File Descriptor（文件描述表）。线程之间不可以共享的部分：stack，program counter，register state。<br>线程与进程的区别：进程是一个具有独立功能的活动，进程之间相互独立，通信需要通过核来完成。线程本省不具备资源，他是系统计算统筹的单位。进程有独立的地址空间，一段崩溃后，不会影响其他进程。线程则没有独立的地址空间，一旦线程出现了问题，则整个进程都都会崩溃。进程切换时要比线程消耗大。</p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁指在多个并发（很重要）进程中，如果每个进程持有某种资源而又等待别的进程释放资源，并且维持这种状态都不能推进的一种状态。<br>条件：1. 互斥。一个资源只能被一个进程使用。2. 不可抢占。进程不能从别人手中抢占资源。3. 不释放。进程在自己等待状态不释放已有资源。4. 进程与资源形成闭合环路状态。<br>银行家算法：系统在给进程分配资源时，先试探性的分配资源。如果不能使进程中的某个进程执行完毕，则系统处于不安全状态，试探作废。若有进程可执行完毕，则回收分配给他的资源。</p>
 
       
     </div>
@@ -394,6 +353,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
 
       
       
@@ -403,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/27/true-complemental-ones-complemental-code/" rel="next" title="原码，反码，补码">
-                <i class="fa fa-chevron-left"></i> 原码，反码，补码
+              <a href="/2019/07/13/reactor-nodejs/" rel="next" title="reactor模型和nodejs的实现">
+                <i class="fa fa-chevron-left"></i> reactor模型和nodejs的实现
               </a>
             
           </div>
@@ -412,10 +377,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/28/bignumber/" rel="prev" title="大数相乘以及快速幂">
-                大数相乘以及快速幂 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,8 +428,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -530,6 +500,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统的基本特性"><span class="nav-number">1.</span> <span class="nav-text">计算机系统的基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">2.</span> <span class="nav-text">操作系统的主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程与进程"><span class="nav-number">3.</span> <span class="nav-text">线程与进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">4.</span> <span class="nav-text">死锁</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
