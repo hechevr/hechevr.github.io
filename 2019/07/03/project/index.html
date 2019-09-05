@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="404 Not Found">
 <meta property="og:description" content="一时兴起决定写写爬虫来当学生项目。 1234567891011121314151617import urllib.requestimport reurl = &quot;http://www.qiushibaike.com/&quot;tag = &quot;hot/page/1&quot;headers = &amp;#123;    &apos;User-Agent&apos;: &apos;User-Agent:Mozilla/5.0&apos;&amp;#125;request =">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-03T13:32:00.627Z">
+<meta property="og:updated_time" content="2019-07-29T16:15:06.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="project">
 <meta name="twitter:description" content="一时兴起决定写写爬虫来当学生项目。 1234567891011121314151617import urllib.requestimport reurl = &quot;http://www.qiushibaike.com/&quot;tag = &quot;hot/page/1&quot;headers = &amp;#123;    &apos;User-Agent&apos;: &apos;User-Agent:Mozilla/5.0&apos;&amp;#125;request =">
@@ -356,6 +356,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://www.qiushibaike.com/"</span></span><br><span class="line">tag = <span class="string">"hot/page/1"</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'User-Agent:Mozilla/5.0'</span></span><br><span class="line">&#125;</span><br><span class="line">request = urllib.request.Request(url+tag, headers=headers)</span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line">content = response.read()</span><br><span class="line">content_utf8 = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line">restr = <span class="string">'&lt;div class="article.*?&lt;div class="author.*?&lt;h2&gt;(.*?)&lt;/h2&gt;.*?&lt;/div&gt;.*?href="/article/(.*?)".*?&lt;span&gt;(.*?)&lt;/span&gt;.*?&lt;/div&gt;'</span></span><br><span class="line">pattern = re.compile(restr, re.S)</span><br><span class="line">items = re.findall(pattern, content_utf8)</span><br><span class="line">write_html(content)</span><br></pre></td></tr></table></figure>
 
 <p>扒了糗事百科首页上的作者，链接。<br>目前打算是写一个自动爬段子分类推送的系统。然而发现现在的网站都坏坏，一个个的都不给人爬了。一会限制访问一会网站验证的。任重而道远啊。</p>
+<p>更新：<br>爬虫计划暂停。感觉自己需要一个大项目把所有知识整合起来。一时兴起又决定写一个小的数据库。具体能完成到什么样子我也不知道。希望至少可以做成本地多线程磁盘缓存版本吧。</p>
 
       
     </div>
@@ -468,7 +469,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
