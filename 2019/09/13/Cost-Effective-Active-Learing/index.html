@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
+<meta name="description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。  然后，文章概括了他们提出的框架：  对于low prediction confiden">
 <meta name="keywords" content="Active Learning,Image Classification">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记[Cost-Effective Active Learning for Deep Image Classification]">
 <meta property="og:url" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
+<meta property="og:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。  然后，文章概括了他们提出的框架：  对于low prediction confiden">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/lc.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/ms.png">
-<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/en.png">
-<meta property="og:updated_time" content="2019-09-13T09:04:31.916Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/lc.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/ms.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/en.PNG">
+<meta property="og:updated_time" content="2019-09-13T09:09:07.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记[Cost-Effective Active Learning for Deep Image Classification]">
-<meta name="twitter:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.png">
+<meta name="twitter:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。  然后，文章概括了他们提出的框架：  对于low prediction confiden">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.PNG">
 
 
 
@@ -362,12 +362,15 @@
 <h3 id="文章梳理"><a href="#文章梳理" class="headerlink" title="文章梳理"></a>文章梳理</h3><h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：</p>
 <ul>
 <li>在选择sample时，置信度很高的unlabeled sample被忽略。</li>
-<li>选择sample和CNN分类不统一。<br>然后，文章概括了他们提出的框架：</li>
+<li>选择sample和CNN分类不统一。</li>
+</ul>
+<p>然后，文章概括了他们提出的框架：</p>
+<ul>
 <li>对于low prediction confidence sample，使用人工标注，具体方法包括least confidence(LC)，margin sampling(MS)， entropy(EN)。</li>
 <li>对于大量的high prediction confidence sample，直接使用预测的方法为label。(最大的改进点，减少了标注数量，同时使用了low confidence sample的信息）<br>然后对于使用high prediction confidence的引入，作者陈述了motivation：1. 由于在feature space中，这些sample和labeled sample距离很近，所以可以看作一种data augmentation的方法。2. 使用大量的pseudolabeling，可以有助于提取鲁棒性feature。<br>之后，在这个section作者还提及的active learning的训练方法。由简入繁。先定一个很高的阈值，随着训练的增加，阈值逐渐降低（后面自己打脸。。。）。</li>
 </ul>
-<h4 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h4><p>到了喜闻乐见的批判其他方法的section了。这里主要是分析了其他work的缺点，再次略过吧。</p>
-<h4 id="Cost-Effective-Active-learning"><a href="#Cost-Effective-Active-learning" class="headerlink" title="Cost Effective Active learning"></a>Cost Effective Active learning</h4><p>这个section就是讲述自己的框架以及具体实现了。首先贴一张图。<br><img src="image1.png" alt><br>如图所示，这个框架先是从零开始。即DL(labeled set)为空。然后，迭代以下算法：每次选取一些unlabeled sample放到classifier中，如果置信度高，则直接使用pseduolabel，否则，使用人工标注。<br>置信度的判断是一个重点，文章描述了三种置信度标准：<br><img src="lc.png" alt><br><img src="ms.png" alt><br><img src="en.png" alt><br>应该还蛮简单的吧。作者在后面的实验部分用了EN来做为标准，生称EN包括这个sample对所有可能label的预测。<br>然后就到了我之前提及的打脸阶段，作者说threshold要随着时间降低，因为unlabeled sample越来越少，所以为了保证置信度，阈值要降低。<br>值得一提的是，虽然在更新参数时使用了pseudolabel，在更新完之后，只有人工标注的sample被放进了DL。</p>
+<h4 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h4><p>到了喜闻乐见的批判其他方法的section了。这里主要是分析了其他work的缺点，在此略过吧。</p>
+<h4 id="Cost-Effective-Active-learning"><a href="#Cost-Effective-Active-learning" class="headerlink" title="Cost Effective Active learning"></a>Cost Effective Active learning</h4><p>这个section就是讲述自己的框架以及具体实现了。首先贴一张图。<br><img src="image1.PNG" alt><br>如图所示，这个框架先是从零开始。即DL(labeled set)为空。然后，迭代以下算法：每次选取一些unlabeled sample放到classifier中，如果置信度高，则直接使用pseduolabel，否则，使用人工标注。<br>置信度的判断是一个重点，文章描述了三种置信度标准：<br><img src="lc.PNG" alt><br><img src="ms.PNG" alt><br><img src="en.PNG" alt><br>应该还蛮简单的吧。作者在后面的实验部分用了EN来做为标准，声称EN包括这个sample对所有可能label的预测。<br>然后就到了我之前提及的打脸阶段，作者说threshold要随着时间降低，因为unlabeled sample越来越少，所以为了保证置信度，阈值要降低。<br>值得一提的是，虽然在更新参数时使用了pseudolabel，在更新完之后，只有人工标注的sample被放进了DL。</p>
 <h4 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a>实验部分</h4><p>略</p>
 <p>总结：论文的方法已经被广泛使用，所以从今天的角度来看的话，没有什么眼前一亮的感觉。不过这也正反映了这个框架被广泛接受。</p>
 
