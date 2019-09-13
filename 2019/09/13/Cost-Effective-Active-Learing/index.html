@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,">
+  <meta name="keywords" content="Active Learning,Image Classification,">
 
 
 
@@ -79,20 +79,23 @@
 
 
 
-<meta name="description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
-<meta name="keywords" content="算法">
+<meta name="description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
+<meta name="keywords" content="Active Learning,Image Classification">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大数相乘以及快速幂">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/bignumber/index.html">
+<meta property="og:title" content="读书笔记[Cost-Effective Active Learning for Deep Image Classification]">
+<meta property="og:url" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
+<meta property="og:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/06/28/bignumber/bidnumber.png">
-<meta property="og:updated_time" content="2019-06-28T10:07:19.962Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/lc.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/ms.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/en.png">
+<meta property="og:updated_time" content="2019-09-13T09:04:31.916Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大数相乘以及快速幂">
-<meta name="twitter:description" content="宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&amp;gt; 对每一位都要进行相乘运算。另一个方法是karatsuba。如图所示，基础思想为divide and conquer。以下为c++代码。 12345678910111213141516171819202">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/28/bignumber/bidnumber.png">
+<meta name="twitter:title" content="读书笔记[Cost-Effective Active Learning for Deep Image Classification]">
+<meta name="twitter:description" content="原文链接 简要本文提供了一个为图像分类的Active Learning框架。 文章梳理Introduction介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：  在选择sample时，置信度很高的unlabeled sample被忽略。 选择sample和CNN分类不统一。然后，文章概括了他们提出的框架： 对于low prediction confidence">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/image1.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/bignumber/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/">
 
 
 
 
 
-  <title>大数相乘以及快速幂 | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>读书笔记[Cost-Effective Active Learning for Deep Image Classification] | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -265,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/bignumber/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/Cost-Effective-Active-Learing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李书赫">
@@ -282,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">大数相乘以及快速幂</h1>
+          <h1 class="post-title" itemprop="name headline">读书笔记[Cost-Effective Active Learning for Deep Image Classification]</h1>
         
 
         <div class="post-meta">
@@ -294,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T11:59:52+08:00">
-                2019-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T16:30:20+08:00">
+                2019-09-13
               </time>
             
 
@@ -317,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
                   </a>
                 </span>
 
@@ -354,13 +357,19 @@
       
 
       
-        <p>宏观上，我们认为数的相乘为constant time，即O(1). 然而，如果考虑到数的位数，那么乘法操作就变得复杂起来。<br>如果两个长度为N的数相乘，小学所讲的乘法运算复杂度为O(n^2) –&gt; 对每一位都要进行相乘运算。<br>另一个方法是karatsuba。<br><img src="bidnumber.png" alt><br>如图所示，基础思想为divide and conquer。<br>以下为c++代码。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_length</span><span class="params">(<span class="keyword">long</span> num)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		num /= <span class="number">10</span>;</span><br><span class="line">		length++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">karatsuba</span><span class="params">(<span class="keyword">long</span> x, <span class="keyword">long</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// x = a * 10^(length/2) + b</span></span><br><span class="line">	<span class="comment">// y = c * 10^(length/2) + d</span></span><br><span class="line">	<span class="comment">// x * y = ac * 10^length + bd + ((a + c)*(b + d) - ac - bd)*10^(length/2)</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (x &lt; <span class="number">10</span> &amp;&amp; y &lt; <span class="number">10</span>) <span class="keyword">return</span> x * y;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// calculate a b c d</span></span><br><span class="line">	<span class="keyword">int</span> length = max(get_length(x), get_length(y));</span><br><span class="line">	<span class="keyword">int</span> t = <span class="built_in">pow</span>(<span class="number">10</span>, length / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> a = x / t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> b = x - a * t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> c = y / t;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> d = y - c * t;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// z1 = ac, z2 = bd, z3 = (a+c)*(b+d) - z1 - z2</span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z1 = karatsuba(a, c);</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z2 = karatsuba(b, d);</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> z3 = karatsuba((a + b), (c + d)) - z1 - z2;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> z1 * t*t + z2 + z3 * t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在写代码的时候，发现使用long并不会扩张int的取值范围。于是去百度，发现，long的位数由编译器来确定，c语言只规定long位数不低于int。<br>而我使用的VC，把long定义为4字节，同int一样。</p>
-<p>快速幂：<br>求幂的时候，我们也可以用divide and conquer来缩短运算。如果把相乘看为O(1)，求N次幂显然需要O(N)次运算。<br>然而，我们可以让底数增大，这样相乘的次数就会减少。例如$2^4 = 2^2 * 2^2$.<br>于是，运算可以简化为O(logN)<br>以下是相应代码。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Power</span><span class="params">(<span class="keyword">double</span> base, <span class="keyword">int</span> exponent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">exp</span> = <span class="built_in">abs</span>(exponent);</span><br><span class="line">    <span class="keyword">double</span> res = <span class="number">1.0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">exp</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exp</span> &amp; <span class="number">1</span>) res *= base;</span><br><span class="line">        base *= base;</span><br><span class="line">        <span class="built_in">exp</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> exponent &lt; <span class="number">0</span>? <span class="number">1</span>/res:res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <p><a href="https://arxiv.org/abs/1701.03551" target="_blank" rel="noopener">原文链接</a></p>
+<h3 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h3><p>本文提供了一个为图像分类的Active Learning框架。</p>
+<h3 id="文章梳理"><a href="#文章梳理" class="headerlink" title="文章梳理"></a>文章梳理</h3><h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>介绍部分主要是概括的批判了一番当时主流的Active Learning的方法。包括：</p>
+<ul>
+<li>在选择sample时，置信度很高的unlabeled sample被忽略。</li>
+<li>选择sample和CNN分类不统一。<br>然后，文章概括了他们提出的框架：</li>
+<li>对于low prediction confidence sample，使用人工标注，具体方法包括least confidence(LC)，margin sampling(MS)， entropy(EN)。</li>
+<li>对于大量的high prediction confidence sample，直接使用预测的方法为label。(最大的改进点，减少了标注数量，同时使用了low confidence sample的信息）<br>然后对于使用high prediction confidence的引入，作者陈述了motivation：1. 由于在feature space中，这些sample和labeled sample距离很近，所以可以看作一种data augmentation的方法。2. 使用大量的pseudolabeling，可以有助于提取鲁棒性feature。<br>之后，在这个section作者还提及的active learning的训练方法。由简入繁。先定一个很高的阈值，随着训练的增加，阈值逐渐降低（后面自己打脸。。。）。</li>
+</ul>
+<h4 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h4><p>到了喜闻乐见的批判其他方法的section了。这里主要是分析了其他work的缺点，再次略过吧。</p>
+<h4 id="Cost-Effective-Active-learning"><a href="#Cost-Effective-Active-learning" class="headerlink" title="Cost Effective Active learning"></a>Cost Effective Active learning</h4><p>这个section就是讲述自己的框架以及具体实现了。首先贴一张图。<br><img src="image1.png" alt><br>如图所示，这个框架先是从零开始。即DL(labeled set)为空。然后，迭代以下算法：每次选取一些unlabeled sample放到classifier中，如果置信度高，则直接使用pseduolabel，否则，使用人工标注。<br>置信度的判断是一个重点，文章描述了三种置信度标准：<br><img src="lc.png" alt><br><img src="ms.png" alt><br><img src="en.png" alt><br>应该还蛮简单的吧。作者在后面的实验部分用了EN来做为标准，生称EN包括这个sample对所有可能label的预测。<br>然后就到了我之前提及的打脸阶段，作者说threshold要随着时间降低，因为unlabeled sample越来越少，所以为了保证置信度，阈值要降低。<br>值得一提的是，虽然在更新参数时使用了pseudolabel，在更新完之后，只有人工标注的sample被放进了DL。</p>
+<h4 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a>实验部分</h4><p>略</p>
+<p>总结：论文的方法已经被广泛使用，所以从今天的角度来看的话，没有什么眼前一亮的感觉。不过这也正反映了这个框架被广泛接受。</p>
 
       
     </div>
@@ -378,7 +387,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/Active-Learning/" rel="tag"># Active Learning</a>
+          
+            <a href="/tags/Image-Classification/" rel="tag"># Image Classification</a>
           
         </div>
       
@@ -391,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/27/memory-in-c/" rel="next" title="C/C++中的内存管理">
-                <i class="fa fa-chevron-left"></i> C/C++中的内存管理
+              <a href="/2019/09/11/ComputerAndNetworkSecurity/" rel="next" title="ComputerAndNetworkSecurity">
+                <i class="fa fa-chevron-left"></i> ComputerAndNetworkSecurity
               </a>
             
           </div>
@@ -400,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/28/computer-system/" rel="prev" title="computer system">
-                computer system <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -455,8 +462,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +534,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简要"><span class="nav-number">1.</span> <span class="nav-text">简要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章梳理"><span class="nav-number">2.</span> <span class="nav-text">文章梳理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#related-work"><span class="nav-number">2.2.</span> <span class="nav-text">related work</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost-Effective-Active-learning"><span class="nav-number">2.3.</span> <span class="nav-text">Cost Effective Active learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验部分"><span class="nav-number">2.4.</span> <span class="nav-text">实验部分</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
