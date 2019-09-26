@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="读书笔记,">
+  <meta name="keywords" content="Computer Security,Memory Corruption,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
-<meta name="keywords" content="读书笔记">
+<meta name="description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
+<meta name="keywords" content="Computer Security,Memory Corruption">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机系统总结">
-<meta property="og:url" content="http://yoursite.com/2019/07/24/computer_system_conclusion/index.html">
+<meta property="og:title" content="读书笔记[SoK Eternal War in Memory]">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/EternalWarinMemory/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
+<meta property="og:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-25T16:00:14.949Z">
+<meta property="og:updated_time" content="2019-09-26T03:54:44.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算机系统总结">
-<meta name="twitter:description" content="抽空把深入了解计算机系统简要看了一遍。这里做个小总结。 计算机系统的基本特性并发，共享，虚拟，异步。并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程">
+<meta name="twitter:title" content="读书笔记[SoK Eternal War in Memory]">
+<meta name="twitter:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/24/computer_system_conclusion/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/26/EternalWarinMemory/">
 
 
 
 
 
-  <title>计算机系统总结 | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>读书笔记[SoK Eternal War in Memory] | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/computer_system_conclusion/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/EternalWarinMemory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李书赫">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">计算机系统总结</h1>
+          <h1 class="post-title" itemprop="name headline">读书笔记[SoK Eternal War in Memory]</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T23:22:43+08:00">
-                2019-07-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T00:24:13+08:00">
+                2019-09-26
               </time>
             
 
@@ -302,6 +302,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -330,16 +352,33 @@
       
 
       
-        <p>抽空把深入了解计算机系统简要看了一遍。这里做个小总结。</p>
-<h3 id="计算机系统的基本特性"><a href="#计算机系统的基本特性" class="headerlink" title="计算机系统的基本特性"></a>计算机系统的基本特性</h3><p>并发，共享，虚拟，异步。<br>并发指在计算机系统中同一时间段内共同运行着多个程序。（区别并行）具体包括用户程序与用户程序，用户程序与系统程序。<br>共享指操作系统程序和多个用户程序共享系统资源（包括cpu运行时间，内存分配）。<br>虚拟（主要指Virtual Memory）指通过技术使得物理实体对应虚拟逻辑对象。如虚拟内存将物理内存对应到程序享用的虚拟地址，这样每个进程都仿佛独占内存。<br>异步。同步异步是一个重要的区分特性。同步指几个进程指令需要有先后的执行，如操作一必须在操作二完成后开始执行。而异步指的是进程以不可预知的速度向前推进。每个进程何时执行，合适暂停，以何样的速度推进都是不可预知的。（好像和我理解的异步有点不一样）</p>
-<h3 id="操作系统的主要功能"><a href="#操作系统的主要功能" class="headerlink" title="操作系统的主要功能"></a>操作系统的主要功能</h3><p>进程控制，进程同步，进程通信，调度。<br>临界资源：一次只能宫一个进程访问的资源。临界区：访问临界区的程序。当一个进程进入临界区时，其他进程无法进入临界区。<br>对临界区加锁可以实现互斥。mutex和semphore都可以充当锁子。<br>进程同步指的是在异步环境下一组并发进程通过相互发送消息进行互相合作，互相等待，使得各自进程按照一定速度执行的过程。<br>进程通信：进程间通信有五种方式，分别是pipe，FIFO，signal，semaphore，共享内存。<br>pipe：单向，有亲缘，只存在于内存中（通过read，write读写）。<br>FIFO：命名管道，无关进程也可以交换数据。以文件形式存在文件系统中。<br>signal：消息链接表，存放在内核中。根据优先级来确定先后，独立于发送接收进程（进程终止，队列仍旧存在），可以实现随机查询，无关次序。<br>semaphore：计数器。P：wait until &gt; 0，semaphore-=1；V：semaphore+=1。用于进程同步，原子操作（即只存在执行或不执行，没有中间状态）。<br>共享内存：最快的通信方式。在内存中开辟一块供多个进程操作。需要配合semaphore。<br>操作系统的任务调度：FIFO(FCFS)，SJF(Shortest job first)，Round Robin，多层反馈队列，高响应比优先调度。<br>Round Robin：每个就绪进程获得一小段CPU时间，时间段用完后，进程交出cpu，重新回到就绪队列，等待下一次分配。<br>多层反馈队列：将任务分配到不同优先级的队列中。有以下几个规则。</p>
-<ol>
-<li>开始时所有任务都是最高优先级。2. 如果任务在规定时间片中没有执行完毕（没有block）则将他下放到下一个优先级。3.每隔一段时间，重新分配优先级（即将所有任务放到最高级中）。<br>高响应比优先调度。对每一个就绪进程计算相应比，执行最高的那个。相应比=（等待时间+执行时间）/执行时间</li>
-</ol>
-<h3 id="线程与进程"><a href="#线程与进程" class="headerlink" title="线程与进程"></a>线程与进程</h3><p>进程是系统分配资源和调度的基本单位。当一个程序要执行时，系统会建立进程并为其分配资源。<br>线程是进程的一个实体。一个进程可以有一个或多个线程。线程自己不拥有资源，但是可以对进程的资源进行操作。<br>线程之间可以共享的部分：数据段，代码段，堆，File Descriptor（文件描述表）。线程之间不可以共享的部分：stack，program counter，register state。<br>线程与进程的区别：进程是一个具有独立功能的活动，进程之间相互独立，通信需要通过核来完成。线程本省不具备资源，他是系统计算统筹的单位。进程有独立的地址空间，一段崩溃后，不会影响其他进程。线程则没有独立的地址空间，一旦线程出现了问题，则整个进程都都会崩溃。进程切换时要比线程消耗大。</p>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁指在多个并发（很重要）进程中，如果每个进程持有某种资源而又等待别的进程释放资源，并且维持这种状态都不能推进的一种状态。<br>条件：1. 互斥。一个资源只能被一个进程使用。2. 不可抢占。进程不能从别人手中抢占资源。3. 不释放。进程在自己等待状态不释放已有资源。4. 进程与资源形成闭合环路状态。<br>银行家算法：每一个进程进入系统时，先声明自己可能需要的资源总量。系统在选择执行某一个任务前，先检查该任务是否安全。即假如满足所选任务的需求，是否还有足够的资源满足剩下资源需求最大的进程的请求。如果安全，则分配执行，否则，该进程会被阻塞。<br>银行家算法是一种预防死锁的方法，而并非打破死锁的方法。打破死锁需要破坏其四条条件之一。1. 强制资源可以共享。2. 进程可以抢占已被占有的资源。3. 进程在阻塞情况下释放自己经占有的资源。4. 检查是否闭合环路。</p>
-<h3 id="连续分配方式"><a href="#连续分配方式" class="headerlink" title="连续分配方式"></a>连续分配方式</h3><p>为一个用户程序分配一个连续的内存空间。可以分为单一连续分配，固定分区分配，动态分区分配，动态重定位分区分配。<br>单一连续分配：将内存分为系统区（内存低端）和高地址（内存高端）。静态分配（作业一旦进入，等待运行结束才可以释放内存）。适用于单用户单任务的os。<br>固定分区分配：内存空间划分为若干个固定大小的分区。一个作业装入一个分区。<br>动态分区分配：在作业进入内存时，根据作业大小动态的建立分区。1. 基于顺序搜索的动态分区分配算法。2. 基于索引搜索的动态分区分配算法。<br>动态重定位分区分配：同动态分区分配基本一致，增加了“紧凑”。如果没有单一连续空间满足需求，则将其他任务所使用的空间堆积在一起。</p>
-<h3 id="虚拟储存器"><a href="#虚拟储存器" class="headerlink" title="虚拟储存器"></a>虚拟储存器</h3><p>在主存中只保存活动区域，其余所需数据放在disk（磁盘）中。<br>从程序角度来看，程序可以申请超过内存本身大小的空间。所申请的虚拟页，存放在内存和硬盘中。<br>虚拟页可以分为已缓存（在内存中），为缓存（在disk中），未分配（没有数据与其关联）。<br>程序访问为缓存和未分配状态的page都会造成缺页中断。<br>缺页中断在实际操作中的表现为程序访问某一虚拟地址，其对应的page table validation bit为0.<br>产生缺页中断后，会采用LRU（least recently used）算法挑选一个牺牲页面同disk中的请求页置换。</p>
+        <h3 id="Abstraction"><a href="#Abstraction" class="headerlink" title="Abstraction"></a>Abstraction</h3><p>Goal and Contribution:</p>
+<ul>
+<li>建立memory corruption attack的通用模型。</li>
+<li>分析防护措施的高效性以及实用性。</li>
+<li>为open research problem提供建议。</li>
+</ul>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>先是开了个玩笑，”The most obvious solution would be to avoid these languages and to rewrite volunerable applications in type-safe languages.” 然后说, 因为C/C++的代码的数量和效率，这不可能。<br>Memory war(内存战争) is an arms race between offense and defense.<br>同时，通过Chrome被exploited four times表达Memory corruption的危害和广泛性。<br>之后，就是陈述这个topic目前的情况了。<br>防守端：<br>Stack cookies, exception handler validation, data execution prevention and Address Space Layout Randomization<br>进攻端：（在以上措施全部应用的情况下）<br>Return Oriented Programming(ROP), information leaks, user script and just-in-time compilation都是可以用来攻击的点。<br>相应的，很多机制都被提出以应对以上的attack，但是都没有被实际应用，原因：</p>
+<ul>
+<li>performance overhead</li>
+<li>not compatible with all currently used features</li>
+<li>not robust</li>
+<li>protection is not complete</li>
+<li>depends on change in some toolchain</li>
+</ul>
+<p>终于到了motivation:<br>systematize and evaluate previously proposed approach. 系统化的管理和评估之前提出的攻击防御手段。</p>
+<ul>
+<li>systematize exploitation: 建立一个general model for memory corruption vulnerabilities and exploitation techniques.</li>
+<li>systematize protection: 根据防御的问题和阶段进行分类。</li>
+<li>evaluation：based on robustness， performance and compatibility。（deployment）</li>
+</ul>
+<p>按照惯例，把前人批判一番。但是本篇论文没有这么做，只是说自己比前人更加系统化，在evaluation模块使用了不同的标准以及引人了实际的deployment的问题。<br>Contribution:</p>
+<ul>
+<li>develop a general model of memory corruption attacks and identify different enforceable security polices based on model.</li>
+<li>clarify what attack vectors are left unprotected by currently used and previously proposed protections by matching their enforced polices with separate phases of different exploits.</li>
+<li>evaluate and compare proposed solutions for performance, compatibility and robustness.</li>
+<li>discuss why many proposed solutions are not adopted in practice and what the necessary criteria for a new solution are.</li>
+</ul>
 
       
     </div>
@@ -357,7 +396,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+            <a href="/tags/Computer-Security/" rel="tag"># Computer Security</a>
+          
+            <a href="/tags/Memory-Corruption/" rel="tag"># Memory Corruption</a>
           
         </div>
       
@@ -370,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/13/reactor-nodejs/" rel="next" title="reactor模型和nodejs的实现">
-                <i class="fa fa-chevron-left"></i> reactor模型和nodejs的实现
+              <a href="/2019/09/25/data-mining/" rel="next" title="data-mining">
+                <i class="fa fa-chevron-left"></i> data-mining
               </a>
             
           </div>
@@ -379,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/05/leetcode/" rel="prev" title="leetcode 的刷题之旅">
-                leetcode 的刷题之旅 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统的基本特性"><span class="nav-number">1.</span> <span class="nav-text">计算机系统的基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">2.</span> <span class="nav-text">操作系统的主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程与进程"><span class="nav-number">3.</span> <span class="nav-text">线程与进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">4.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配方式"><span class="nav-number">5.</span> <span class="nav-text">连续分配方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟储存器"><span class="nav-number">6.</span> <span class="nav-text">虚拟储存器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction"><span class="nav-number">1.</span> <span class="nav-text">Abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
             
 
           </div>
