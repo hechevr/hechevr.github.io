@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
+<meta name="description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and">
 <meta name="keywords" content="Computer Security,Memory Corruption">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记[SoK Eternal War in Memory]">
 <meta property="og:url" content="http://yoursite.com/2019/09/26/EternalWarinMemory/index.html">
 <meta property="og:site_name" content="404 Not Found">
-<meta property="og:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
+<meta property="og:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-26T03:54:44.950Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/26/EternalWarinMemory/attacksAndDefences.PNG">
+<meta property="og:updated_time" content="2019-09-27T16:32:00.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记[SoK Eternal War in Memory]">
-<meta name="twitter:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and t">
+<meta name="twitter:description" content="AbstractionGoal and Contribution:  建立memory corruption attack的通用模型。 分析防护措施的高效性以及实用性。 为open research problem提供建议。  Introduction先是开了个玩笑，”The most obvious solution would be to avoid these languages and">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/26/EternalWarinMemory/attacksAndDefences.PNG">
 
 
 
@@ -352,7 +354,8 @@
       
 
       
-        <h3 id="Abstraction"><a href="#Abstraction" class="headerlink" title="Abstraction"></a>Abstraction</h3><p>Goal and Contribution:</p>
+        <p><img src="attacksAndDefences.PNG" alt></p>
+<h3 id="Abstraction"><a href="#Abstraction" class="headerlink" title="Abstraction"></a>Abstraction</h3><p>Goal and Contribution:</p>
 <ul>
 <li>建立memory corruption attack的通用模型。</li>
 <li>分析防护措施的高效性以及实用性。</li>
@@ -379,6 +382,139 @@
 <li>evaluate and compare proposed solutions for performance, compatibility and robustness.</li>
 <li>discuss why many proposed solutions are not adopted in practice and what the necessary criteria for a new solution are.</li>
 </ul>
+<h3 id="Attacks"><a href="#Attacks" class="headerlink" title="Attacks"></a>Attacks</h3><p>这个section主要讨论了基于攻击方式分类以及相应的措施和问题。</p>
+<h4 id="Memory-corruption"><a href="#Memory-corruption" class="headerlink" title="Memory corruption"></a>Memory corruption</h4><p>总结了memory corruption攻击的方式。具体包括两个step: 1. makes a pointer invalid. 2. dereferences the pointer.<br>对于step 1，有两种方式，分别是dangling pointer（使用free后的pointer，对应temporal error）和out of bound（使用指针指向数组之外。对应spatial error）。（其实还包括failure allocation，也就是null pointer）。<br>对于step 2，上面的两种指针都可能被利用。可以分为read和write。<br>read：攻击者可以使得指针指向被他控制的内存，当读取相应的指针时，就会产生corruption或者泄露信息。<br>write：攻击者有可能去overwrite执行数据或者代码（return address，virtual table pointer）。都会对应相应的corruption。</p>
+<h4 id="Code-corruption-attack"><a href="#Code-corruption-attack" class="headerlink" title="Code corruption attack"></a>Code corruption attack</h4><p>防止code section被overwrite的保护措施：Code Integrity enforces the program code can not be written.<br>但是这些措施还是有问题。比如self modifying code和Just-In-Time Compilation. (只有在time window内的部分会被保护）。</p>
+<h4 id="Control-flow-hijack-attack"><a href="#Control-flow-hijack-attack" class="headerlink" title="Control flow hijack attack"></a>Control flow hijack attack</h4><p>step 3，使用memory error来控制code pointer。通过控制code pointer来进行corruption。相应的防护措施是Code Pointer Integrity。<br>step 4，解读/修改具体指向内存。由于attack需要知道具体的内存意义，所以可以用Address Space Randomization来防止。<br>step 5，execution needs to load corrupted pointer into instruction pointer。即需要将corrupted pointer加载入instruction pointer。即需要将corrupte。可以通过control-flow integrity来防止。<br>step 6，执行劫持的代码。可以使用Non-executable data policy来防止（stack/heap non-execuatble）。Non-execuatble data 和code integrity可以联合称号W^X policy，也就是让内存page执行和写入二选一。<br>W^X cost很低，是一种pratical的方法。但是在两种情况下还是不能完全防止。</p>
+<ol>
+<li>由于JIT compilation或者self-modifying code的存在，使得W^X不能完全保证（fully enforce）。</li>
+<li>攻击者可以reused code（return to libc attack or gadgets）。对于Return Oriented programming（ROP）以及其泛化版本jump oriented programming（JOP）。</li>
+</ol>
+<h5 id="Data-only-attack"><a href="#Data-only-attack" class="headerlink" title="Data-only attack"></a>Data-only attack</h5><p>通过修改敏感数据来劫持代码，以达到控制代码执行方式。对应的防护是Data Integrity和data space randomization。<br>注意：data integrity包括code integrity和code pointer integrity。</p>
+<h5 id="Information-leak"><a href="#Information-leak" class="headerlink" title="Information leak"></a>Information leak</h5><p>任意的exploit都可被利用来得到信息。相应的防护措施也在memory safety里面提及了。唯一需要特别提及的，是full data space randomization。</p>
+<h3 id="Currently-used-protections-and-real-world-exploits"><a href="#Currently-used-protections-and-real-world-exploits" class="headerlink" title="Currently used protections and real world exploits"></a>Currently used protections and real world exploits</h3><h4 id="Stack-smashing-protection"><a href="#Stack-smashing-protection" class="headerlink" title="Stack smashing protection"></a>Stack smashing protection</h4><p>检测stack overflow导致的overwrite return address。<br>在return address后放一个随机数字（cookie or canary）。每次执行后return的时候都检查cookie是否改变。<br>SafeSEH和SEHOP用了同样的思想，在所有handler pointer使用前都要检查cookies。属于一种control flow integrity。<br>问题：</p>
+<ul>
+<li>只检查某些特定的code pointer。</li>
+<li>检查机制可以被跳过。</li>
+</ul>
+<h4 id="DEP-W-X"><a href="#DEP-W-X" class="headerlink" title="DEP/W^X"></a>DEP/W^X</h4><p>控制某些memory只能写或者只能执行。<br>问题：</p>
+<ul>
+<li>不能阻止reused attack（ROP）</li>
+</ul>
+<p>ASLR是一种广泛使用Address Space Randomization机制。把各种memory segments都随机摆放。<br>问题：</p>
+<ul>
+<li>实现的很弱（weakness）</li>
+<li>information leakage</li>
+</ul>
+<p>由于web browser，PDF viewers和office application都可以运行script，所以用户可以在本地测试memory layout和cookies。</p>
+<h3 id="Approaches-and-evvaluation-criteria"><a href="#Approaches-and-evvaluation-criteria" class="headerlink" title="Approaches and evvaluation criteria"></a>Approaches and evvaluation criteria</h3><p>protection techniques被分为两种类型：probabilistic和deterministic。</p>
+<h4 id="protection"><a href="#protection" class="headerlink" title="protection"></a>protection</h4><p>effectiveness和accuracy。由Falsed negative 和falsed positive描述。</p>
+<h4 id="cost"><a href="#cost" class="headerlink" title="cost"></a>cost</h4><p>performance overhead：实验证明大于10%的overhead不会被采用。工业上认为5%以内才会被采用。<br>memory overhead：比runtime performance影响小很多。</p>
+<h4 id="Compatibility"><a href="#Compatibility" class="headerlink" title="Compatibility"></a>Compatibility</h4><p>source compatibility：不用手动更改代码。工业界认为需要porting or annotating the source code impractical。<br>binary compatibility：不用修改binary modules。可能仍旧与一些没有修改的libraries相连。<br>modularity support：独立模块被独立处理。（需要支持所有的indispensable module）。</p>
+<h3 id="probabilistic-methods"><a href="#probabilistic-methods" class="headerlink" title="probabilistic methods"></a>probabilistic methods</h3><p>3种主要approaches：instruction sed randomization，address space randomization和data space randomization。<br>由于hardware improvements，ISR已经obsolete（过时）。<br>ASR：随机code和data。DSR：随机所有内存。</p>
+<h4 id="Address-space-randomization（ASP）"><a href="#Address-space-randomization（ASP）" class="headerlink" title="Address space randomization（ASP）"></a>Address space randomization（ASP）</h4><p>Address space layout randomization（ASLR）是最常用的ASP技术。重新安排code，data内存区域的位置。<br>问题：</p>
+<ul>
+<li>如果不是所有code和data section都被随机安排，保护总是可以被跳过的。</li>
+<li>linux中main module总是固定的address。</li>
+<li>由于编译成position independent executables会额外增加10%的效率下降，大部分程序都不选择如此。</li>
+<li>对于32-bit机器，可以使用brute-force or de-randomization攻击。</li>
+<li>使用partial pointer overwrite，可以使得指针指向就近的地址。</li>
+<li>对于高熵值（x64），仍旧可以用information leak得到有用信息从而掠过protection。</li>
+</ul>
+<p>W^X：规定内存块只可以执行或者只可以写入。<br>问题：</p>
+<ul>
+<li>code reuse。</li>
+</ul>
+<p>Self-Transforming instruction reolocation(STIR)<br>在launch时，随机re-order binary的基本模块。可以使得ROP攻击更加难。<br>问题：</p>
+<ul>
+<li>不能保护return-to-libc攻击。</li>
+<li>假设了ROP需要多个gadgets，但是有些attack只需要一个gadgets。</li>
+</ul>
+<p>Pointer encryption（PointGuard）<br>对所有pointer加密，在加载入register前解密。使用XOR对所有pointer和固定的key。<br>问题：</p>
+<ul>
+<li>attacker可以轻易的得到key。</li>
+<li>既不是binary也不是source code compatible。</li>
+</ul>
+<h4 id="Data-Space-Randomization"><a href="#Data-Space-Randomization" class="headerlink" title="Data Space Randomization"></a>Data Space Randomization</h4><p>对所有variables加密。（PointGuard只对location/pointer加密）。<br>问题：</p>
+<ul>
+<li>平均overhead为15%。</li>
+<li>not binary compatible。</li>
+<li>当需要point-to analysis时，modularity将会成为一个问题。因为解密需要全局进行，所以无发对单个模块独立执行。</li>
+</ul>
+<h3 id="Memory-safety"><a href="#Memory-safety" class="headerlink" title="Memory safety"></a>Memory safety</h3><p>强迫memory safety会使得所有内存corruption都不可行。我们想要通过嵌入的low level reference monitors来使得不安全的代码有类似的安全性。<br>相应的措施可以在source code，intermediate representation以及binary level。</p>
+<h4 id="spatial-safety-with-pointer-bounds"><a href="#spatial-safety-with-pointer-bounds" class="headerlink" title="spatial safety with pointer bounds"></a>spatial safety with pointer bounds</h4><p>只有跟踪pointer bounds才能完全保证空间safety。</p>
+<p>CCured 和Cyclone使用”fate pointers“来增加额外信息。<br>问题：</p>
+<ul>
+<li>source compatibility</li>
+<li>binary compatibility</li>
+</ul>
+<p>SoftBound通过区分metadata解决了compatibility的问题。有一个hash table去把pointer和相应的metadata连接起来。<br>问题：</p>
+<ul>
+<li>67% overhead</li>
+<li>对于unprotected libraries来说，只提供了limited compatibility。如果被unprotected module修改了某些pointer，相应的metadata不会被修改。</li>
+</ul>
+<h4 id="spatial-safety-with-object-bounds"><a href="#spatial-safety-with-object-bounds" class="headerlink" title="spatial safety with object bounds"></a>spatial safety with object bounds</h4><p>为了解决上文compatibility的问题，提出了与object相关联的metadata。在pointer计算时就阻止其指向object之外（而不是dereference时候）。<br>问题：</p>
+<ul>
+<li>pointer可能指向外部，只要没有dereference。(J&amp;K)GCC patch第一个使用这种方法，通过前方多一个byte作为padding，当访问超过这一个byte时，产生alarm（maybe false alarm）。</li>
+<li>仍旧可能有false negative。指向object内部的指针不会被检查。由于C允许pointer计算符合struct的规则，pointer需要根据struct的大小进行迭代。</li>
+<li>尽管有很多改进方法，overhead仍旧超过60%（baggy bounds checking）。</li>
+</ul>
+<h4 id="Temporal-Safety"><a href="#Temporal-Safety" class="headerlink" title="Temporal Safety"></a>Temporal Safety</h4><p>主要是Use-after-free和double-free。</p>
+<p>Special allocators<br>Cling作为malloc的代替，保证某一地址的重新使用只能是同种object和同种alignment。<br>问题：</p>
+<ul>
+<li>没有防止dereference dangling pointers。</li>
+<li>不能防止unsafe reuse of local，stack allocated object。</li>
+</ul>
+<p>Object based approaches<br>让deallocated memory放在shadow memory space。可以防止use after free。<br>问题：</p>
+<ul>
+<li>reallocated for another pointer会导致shadow memory可以被访问。因此之前的dangling pointer仍旧可以访问。</li>
+<li>唯一防止use after free的方式是对pointer增加metadata而不是对object。</li>
+<li>overhead 73%。</li>
+</ul>
+<p>pointer based approaches<br>当free一个pointer时，所有pointer pointing to it应该被记录在metadata中，所以不能用一个bit来记录。<br>CETS被证实保证了temporal safety（在spatial safety被保证的前提下）。<br>问题：</p>
+<ul>
+<li>48% overhead。</li>
+<li>当使用softbound来保证spatial和temporal，需要116%的overhead。</li>
+</ul>
+<h3 id="Generic-attack-defenses"><a href="#Generic-attack-defenses" class="headerlink" title="Generic attack defenses"></a>Generic attack defenses</h3><p>data integrity 和data flow integrity都是相对比较弱的措施。</p>
+<h4 id="data-integrity"><a href="#data-integrity" class="headerlink" title="data integrity"></a>data integrity</h4><p>aproximation of spatial memory integrity。only protect against invalid memory write， not read。</p>
+<p>integrity of safe objects<br>先确定一个unsafe pointer的集合，然后对所有unsafe pointer指向的内存区域做标记。每个byte都被标记在shadow memory（在creation和deallocation时都标记）。写入时，先检查shadow memory。<br>问题：</p>
+<ul>
+<li>in case of memory，the corruption can still happen。</li>
+<li>cannot protect from reading corrupted.</li>
+<li>false alarm if created by unprotected module and then used by transformed module。</li>
+</ul>
+<p>integrity of points-to sets<br>Write integrity testing（WIT）作为integrity of safe objects的进阶版本，对所有pointer作标记，其指向的内存都做了唯一标记（不同于前者），相应的pointer写入只能写入自己范围。<br>同时，indirect call也被检查（根据唯一标识id来寻找memory）。<br>问题：</p>
+<ul>
+<li>not read checking。</li>
+<li>temporal corruption return address is still possible。</li>
+<li>performance overhead can be up to 180%。</li>
+</ul>
+<p>Data flow integrity<br>check read instruction before data be used。即，强迫data最后被写入遵从代码control flow graph。<br>every written memory location is marked in the shadow memory with writing instruction’s ID。<br>问题：</p>
+<ul>
+<li>overhead 50-100%。</li>
+<li>not binary compatible。</li>
+<li>仅仅检测read instrumentation。</li>
+</ul>
+<h3 id="Control-flow-hijack-defenses"><a href="#Control-flow-hijack-defenses" class="headerlink" title="Control flow hijack defenses"></a>Control flow hijack defenses</h3><p>code pointer integrity: prevention the corruption of code pointers<br>control flow integrity: detect the corruption</p>
+<h4 id="code-pointer-integrity"><a href="#code-pointer-integrity" class="headerlink" title="code pointer integrity"></a>code pointer integrity</h4><p>这一步的检测很困难。<br>一方面，一些code pointer可以被设置为只读，例如vtable和global offset table。但是另一些code pointer如user defined function pointer不可能被设置为只读。<br>另一方面，即使保证了这些内存的正确性（integrity），注入仍旧是可能的。如使用一个dangling pointer时，可能会用到错误的virtual function table。</p>
+<h4 id="control-flow-integrity"><a href="#control-flow-integrity" class="headerlink" title="control flow integrity"></a>control flow integrity</h4><p>这方面的防护主要是针对indirect control transfers。</p>
+<p>dynamic return integrity<br>最著名的攻击是stack smashing。<br>防护一，stack cookie or canary。这种防护可以在return和local buffer之间放一个cookie/canary，在执行return前查看是否被overflow。<br>问题：</p>
+<ul>
+<li>donot protect indirect calls and jumps</li>
+<li>information leak<br>优点：</li>
+<li>效率高。overhead只有1%。</li>
+<li>compatibility完美。</li>
+</ul>
+<p>防护二，shadow stacks。解决了cookie的两个问题。在return被放在stack时，return address也会被放在一个独立的shadow stack，在返回时会被拿来比较。<br>同时，为了保护shadow stack，RAD用了guard pages或者switching write permission。但是都引入了不小的cost。</p>
+<p>stack control flow graph integrity<br>对于indirect calls和jumps</p>
+<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>根据时间顺序总结了目前的攻守战役。</p>
+<ul>
+<li>为了解决ROP攻击，researcher发明了ASLR，使得code，data顺序随机排列。</li>
+<li>由于JIT compilation以及其他offline script的软件的流行，attacker可以猜到地址排列破解了randomization。</li>
+</ul>
+<p>作者提出，相比于针对某一种攻击，researcher应该更加注重攻击方向（big picture）。这正是本篇paper的作用。</p>
+<p>同时，researcher在研究时，也要注意solution的效率。本文提出了几个评价标准，包括overhead，compatibility。</p>
 
       
     </div>
@@ -555,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction"><span class="nav-number">1.</span> <span class="nav-text">Abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction"><span class="nav-number">1.</span> <span class="nav-text">Abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attacks"><span class="nav-number">3.</span> <span class="nav-text">Attacks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory-corruption"><span class="nav-number">3.1.</span> <span class="nav-text">Memory corruption</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-corruption-attack"><span class="nav-number">3.2.</span> <span class="nav-text">Code corruption attack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Control-flow-hijack-attack"><span class="nav-number">3.3.</span> <span class="nav-text">Control flow hijack attack</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Data-only-attack"><span class="nav-number">3.3.1.</span> <span class="nav-text">Data-only attack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Information-leak"><span class="nav-number">3.3.2.</span> <span class="nav-text">Information leak</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Currently-used-protections-and-real-world-exploits"><span class="nav-number">4.</span> <span class="nav-text">Currently used protections and real world exploits</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stack-smashing-protection"><span class="nav-number">4.1.</span> <span class="nav-text">Stack smashing protection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DEP-W-X"><span class="nav-number">4.2.</span> <span class="nav-text">DEP/W^X</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Approaches-and-evvaluation-criteria"><span class="nav-number">5.</span> <span class="nav-text">Approaches and evvaluation criteria</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#protection"><span class="nav-number">5.1.</span> <span class="nav-text">protection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cost"><span class="nav-number">5.2.</span> <span class="nav-text">cost</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Compatibility"><span class="nav-number">5.3.</span> <span class="nav-text">Compatibility</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#probabilistic-methods"><span class="nav-number">6.</span> <span class="nav-text">probabilistic methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Address-space-randomization（ASP）"><span class="nav-number">6.1.</span> <span class="nav-text">Address space randomization（ASP）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Space-Randomization"><span class="nav-number">6.2.</span> <span class="nav-text">Data Space Randomization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-safety"><span class="nav-number">7.</span> <span class="nav-text">Memory safety</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#spatial-safety-with-pointer-bounds"><span class="nav-number">7.1.</span> <span class="nav-text">spatial safety with pointer bounds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spatial-safety-with-object-bounds"><span class="nav-number">7.2.</span> <span class="nav-text">spatial safety with object bounds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Temporal-Safety"><span class="nav-number">7.3.</span> <span class="nav-text">Temporal Safety</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generic-attack-defenses"><span class="nav-number">8.</span> <span class="nav-text">Generic attack defenses</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-integrity"><span class="nav-number">8.1.</span> <span class="nav-text">data integrity</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Control-flow-hijack-defenses"><span class="nav-number">9.</span> <span class="nav-text">Control flow hijack defenses</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#code-pointer-integrity"><span class="nav-number">9.1.</span> <span class="nav-text">code pointer integrity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#control-flow-integrity"><span class="nav-number">9.2.</span> <span class="nav-text">control flow integrity</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discussion"><span class="nav-number">10.</span> <span class="nav-text">Discussion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conclusion"><span class="nav-number">11.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>
