@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Computer Security,Binary Analysis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Abstraction and introductionimportance of binary analysis:  很多情况下只用运行才能发现代码的某些特性。 解释型语言需要binary program 解释或 just-in-time 来及时编译。（都需要binary） OS核心以及一些需要考虑效率的应用都是用C/C++实现的。 很多网络上的应用资源都被限制，其基础框架都需要用C/C++来实">
+<meta name="keywords" content="Computer Security,Binary Analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记[Offensive Techniques in Binary Analysis]">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/OffensiveTechniquesInBinary/index.html">
+<meta property="og:site_name" content="404 Not Found">
+<meta property="og:description" content="Abstraction and introductionimportance of binary analysis:  很多情况下只用运行才能发现代码的某些特性。 解释型语言需要binary program 解释或 just-in-time 来及时编译。（都需要binary） OS核心以及一些需要考虑效率的应用都是用C/C++实现的。 很多网络上的应用资源都被限制，其基础框架都需要用C/C++来实">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-16T05:55:38.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读书笔记[Offensive Techniques in Binary Analysis]">
+<meta name="twitter:description" content="Abstraction and introductionimportance of binary analysis:  很多情况下只用运行才能发现代码的某些特性。 解释型语言需要binary program 解释或 just-in-time 来及时编译。（都需要binary） OS核心以及一些需要考虑效率的应用都是用C/C++实现的。 很多网络上的应用资源都被限制，其基础框架都需要用C/C++来实">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":25,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/13/OffensiveTechniquesInBinary/">
+
+
+
+
+
+  <title>读书笔记[Offensive Techniques in Binary Analysis] | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">404 Not Found</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/OffensiveTechniquesInBinary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="404 Not Found">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读书笔记[Offensive Techniques in Binary Analysis]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-13T17:38:36+08:00">
+                2019-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Abstraction-and-introduction"><a href="#Abstraction-and-introduction" class="headerlink" title="Abstraction and introduction"></a>Abstraction and introduction</h3><p>importance of binary analysis:</p>
+<ul>
+<li>很多情况下只用运行才能发现代码的某些特性。</li>
+<li>解释型语言需要binary program 解释或 just-in-time 来及时编译。（都需要binary）</li>
+<li>OS核心以及一些需要考虑效率的应用都是用C/C++实现的。</li>
+<li>很多网络上的应用资源都被限制，其基础框架都需要用C/C++来实现。</li>
+<li>compiler and tool chains are not bug-free。</li>
+</ul>
+<p>low-level language所带来的unsecurity的严重性：</p>
+<ul>
+<li>尽管有许多措施来防止，buffer overflow仍旧是是最容易见到的software flaw之一。</li>
+<li>memory corruption vulnerabilities 是剩余的最容易见到的flaw部分。</li>
+<li>不光在PC 端software，远程应用如smartlocks，pacemarks和手机都是饱受折磨的对象。</li>
+</ul>
+<p>problem of current binary analysis techniques：</p>
+<ul>
+<li>many implementations of binary analysis techniques begin and end their existence as a research prototype/. (waste time for startup cost)</li>
+<li>the system is often unavailable to the public. reproduce the system is time-wasting and replicating results is impractical.</li>
+<li>comparations between different implementation details and different evaluation datasets are not persuasive.</li>
+</ul>
+<p>contribution:</p>
+<ul>
+<li>reproduce many existing approaches in offensive binary analysis in a single coherent framework.</li>
+<li>show the difficulties of combining diverse binary analysis techniques and applying them on a large scale.</li>
+<li>open source for future use.</li>
+<li>使用统一的框架，同意比较标准DARPA CGC。</li>
+</ul>
+<h3 id="automated-binary-analysis"><a href="#automated-binary-analysis" class="headerlink" title="automated binary analysis"></a>automated binary analysis</h3><p>本章节说明了需要克服的困难以及为什么DARPA是一个好的比较标准。</p>
+<h4 id="trade-offs"><a href="#trade-offs" class="headerlink" title="trade offs"></a>trade offs</h4><p>Replayability, Semantic insight<br>Replayability</p>
+<ul>
+<li>high replayability -&gt; low coverage.</li>
+<li>low replayability -&gt; high false positives</li>
+</ul>
+<p>Semantic insight</p>
+<ul>
+<li>semantic insight -&gt; large amount of data (dynamic analysis)</li>
+<li>simpler data domains -&gt; low semantic insight (static analysis)</li>
+</ul>
+<p>replayability + semantic insight = problem of scability.</p>
+<p>Environment model: modern OS is extremely complex so that semantic analysis is difficulit.</p>
+<h4 id="The-DARPA-Cyber-Grand-Challenge"><a href="#The-DARPA-Cyber-Grand-Challenge" class="headerlink" title="The DARPA Cyber Grand Challenge"></a>The DARPA Cyber Grand Challenge</h4><p>特点：</p>
+<ul>
+<li>create a symple OS as environment specifically fo the CGC.</li>
+<li>binaries have a wide range of complexity.</li>
+</ul>
+<h3 id="BACKGROUND-static-vulnerability-discovery"><a href="#BACKGROUND-static-vulnerability-discovery" class="headerlink" title="BACKGROUND: static vulnerability discovery"></a>BACKGROUND: static vulnerability discovery</h3><p>categories: graphs VS data<br>drawback: not replayable, operate on simpler data domains-&gt;low semantic insite.<br>result: high rate of false positives.</p>
+<h4 id="Recovering-Control-flow-CFG"><a href="#Recovering-Control-flow-CFG" class="headerlink" title="Recovering Control flow(CFG)"></a>Recovering Control flow(CFG)</h4><p>two properties of CFG recovery analysis: soundness(true positive rate) and completness(inverse of false positive rate).<br>Graph-based vulnerability discovery(program property graphs): build a model of a bug, represented by a set of nodes in a control-flow or data-dependency graph. However, only pre-existing vulnerability will be discovered.</p>
+<h4 id="vulnerability-detection-with-data-modeling"><a href="#vulnerability-detection-with-data-modeling" class="headerlink" title="vulnerability detection with data modeling"></a>vulnerability detection with data modeling</h4><p>value-set analysis: approximate the state of program at any given point.</p>
+<h3 id="BACKGROUND-dynamic-vulnerability-discovery"><a href="#BACKGROUND-dynamic-vulnerability-discovery" class="headerlink" title="BACKGROUND: dynamic vulnerability discovery"></a>BACKGROUND: dynamic vulnerability discovery</h3><p>concret and symbolic execution.<br>high replayable but vary in terms of semantic insight.</p>
+<h4 id="dynamic-concrete-execution"><a href="#dynamic-concrete-execution" class="headerlink" title="dynamic concrete execution"></a>dynamic concrete execution</h4><h5 id="fuzzing"><a href="#fuzzing" class="headerlink" title="fuzzing"></a>fuzzing</h5><p>malformed input is provided to trigger a crash. suffer from test-case requirement.</p>
+<ol>
+<li>coverage-based fuzzing: maximize the amount of code executed. problem: lack of semantic insight(what part of input).</li>
+<li>taint-based fuzzing: unaware of how to mutate this input.</li>
+</ol>
+<h5 id="dynamic-symbolic-execution"><a href="#dynamic-symbolic-execution" class="headerlink" title="dynamic symbolic execution"></a>dynamic symbolic execution</h5><p>track the state of registers and memory. whenever a condition branch is reached, execution forks and follows both path.</p>
+<ol>
+<li>classical dynamic symbolic execution. performing path exploration until a vulnerable state is identified. problem: scability, bugs found are shallow.</li>
+<li>symbolic assisted fuzzing: use in-depth understanding of analyzed program to mutate inputs. </li>
+<li>under constrained symbolic execution: execute only part of application. problem: not possible to ensure a proper context-&gt;false positive. no replayability of the bugs.</li>
+</ol>
+<h3 id="BACKGROUND-exploitation"><a href="#BACKGROUND-exploitation" class="headerlink" title="BACKGROUND: exploitation"></a>BACKGROUND: exploitation</h3><p>goal: reproducing an identified crash. automatically generating the exploit to verify the security impoact of the crash and hardening the exploit to make it rsilient in the presence of modern mitigation techniques.<br>简单来讲，这个section会介绍一些techniques，其非但可以找到漏洞，还可以复现漏洞并且延申到现代防御系统中。</p>
+<h4 id="crash-reproduction"><a href="#crash-reproduction" class="headerlink" title="crash reproduction"></a>crash reproduction</h4><p>（possible improvement：现代分析手段通常都是在非现实环境中运行的。如fuzzy会hard-code一些source of randomness。原因：1. assumption that same impute will resule same result。2. modeling randomness in other techniques is not well-explored research area）<br>两种类型：missing data 和 missing relationships<br>missing data：guess correct response -&gt; not replaible. (possible improvement: not implemented in angr)<br>missing relationships: low semantic insight are unable to recoverthe relationships between data retrieved. (replayer will compute the preconditions on program path.)</p>
+<h4 id="exploit-generation"><a href="#exploit-generation" class="headerlink" title="exploit generation"></a>exploit generation</h4><p>automatically convert crashing input into an exploit for the application.</p>
+<h4 id="exploit-hardening"><a href="#exploit-hardening" class="headerlink" title="exploit hardening"></a>exploit hardening</h4><p>non-executable stack regions and address space layout randomization have severely reduced the efficacy of traditional exploits.<br>automatically harden the exploits generated using current techniques against such defenses.<br>translate shellcode based exploit into an equivalent exploit utilizing return oriented programming.</p>
+<h3 id="Analysis-engine"><a href="#Analysis-engine" class="headerlink" title="Analysis engine"></a>Analysis engine</h3><p>终于到了重头戏，angr的设计和实现。<br>设计部分主要说了几个设计目标：</p>
+<ul>
+<li>cross architecture support</li>
+<li>cross platform support</li>
+<li>support for different analysis paradigms: provide different types of memory models as well as data domains.</li>
+<li>usability</li>
+</ul>
+<p>然后，paper中吐槽了不同的实现难度很难估计（possible improvement？）</p>
+<p>之后是冗长的子模块和open source release。略过。</p>
+<h3 id="IMPLEMENTATION-CFG-recovery"><a href="#IMPLEMENTATION-CFG-recovery" class="headerlink" title="IMPLEMENTATION: CFG recovery"></a>IMPLEMENTATION: CFG recovery</h3><h4 id="CFGAccurate"><a href="#CFGAccurate" class="headerlink" title="CFGAccurate"></a>CFGAccurate</h4><p>CFGAccurate结合了forced execution，lightweight backward slicing，symbolic execution 和value set analysis。（possible improvement: effectiveness?)</p>
+<h4 id="CFGFast"><a href="#CFGFast" class="headerlink" title="CFGFast"></a>CFGFast</h4><p>function identification，recursive disassembly he indirect jump resolution。快速的recover a cfg with a high coverage without a concern for understanding the researchability of functions.</p>
+<h3 id="IMPLEMENTATION-value-set-analysis"><a href="#IMPLEMENTATION-value-set-analysis" class="headerlink" title="IMPLEMENTATION: value set analysis"></a>IMPLEMENTATION: value set analysis</h3><p>VSA 分析主要是通过value set abstract domain来估计每一时刻registers的值从而分析crah。<br>本篇paper做了一些提升：</p>
+<ol>
+<li>Creating a discrete set of strided-intervals</li>
+<li>Applying an algebraic solver to path predicates</li>
+<li>Adopting a signedness-agnostic domain</li>
+</ol>
+<h3 id="IMPLEMENTATION-under-constrained-symbolic-execution"><a href="#IMPLEMENTATION-under-constrained-symbolic-execution" class="headerlink" title="IMPLEMENTATION: under constrained symbolic execution"></a>IMPLEMENTATION: under constrained symbolic execution</h3><h3 id="IMPLEMENTATION-symbolic-assisted-fuzzing"><a href="#IMPLEMENTATION-symbolic-assisted-fuzzing" class="headerlink" title="IMPLEMENTATION: symbolic assisted fuzzing"></a>IMPLEMENTATION: symbolic assisted fuzzing</h3><h3 id="IMPLEMENTATION-crash-reproduction"><a href="#IMPLEMENTATION-crash-reproduction" class="headerlink" title="IMPLEMENTATION: crash reproduction"></a>IMPLEMENTATION: crash reproduction</h3><h3 id="IMPLEMENTATION-exploit"><a href="#IMPLEMENTATION-exploit" class="headerlink" title="IMPLEMENTATION: exploit"></a>IMPLEMENTATION: exploit</h3><h3 id="IMPLEMENTATION-exploit-hardening"><a href="#IMPLEMENTATION-exploit-hardening" class="headerlink" title="IMPLEMENTATION: exploit hardening"></a>IMPLEMENTATION: exploit hardening</h3><h3 id="Comparative-evaluation"><a href="#Comparative-evaluation" class="headerlink" title="Comparative evaluation"></a>Comparative evaluation</h3><p>由于使用同种引擎且分享90%的相同代码，比较是有意义的。</p>
+<h4 id="CFG-recovery"><a href="#CFG-recovery" class="headerlink" title="CFG recovery"></a>CFG recovery</h4><p>CFGAccurate，CFGFast VS IDA Pro 6.9<br>possible improvement: ground truth CFG information is not available.<br>using relative number of recovered basic blocks and control flow transfers between the results of IDA and our CFG recovery.<br>completeness: CFGFast 比IDA找出了更多的block和edges。(CFGAccurate?)<br>reachability information: CFGAccurate does not leverate ad hoc heuristics -&gt; worse result than IDA. (actually, in the table, both result and time are worse than IDA: possible improvement)</p>
+<h4 id="Evaluation-of-vulnerability-analysis-techniques"><a href="#Evaluation-of-vulnerability-analysis-techniques" class="headerlink" title="Evaluation of vulnerability analysis techniques"></a>Evaluation of vulnerability analysis techniques</h4><p>under-constrained symbolic execution would result in a large number of false positives. result are not replayable.<br>Static buffer overlap detection: also not replayable and suffer from false positives.<br>possible improvement: the improvement of static analysis techniques on real binaries appears to be an area in need of research attention.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Computer-Security/" rel="tag"># Computer Security</a>
+          
+            <a href="/tags/Binary-Analysis/" rel="tag"># Binary Analysis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/26/EternalWarinMemory/" rel="next" title="读书笔记[SoK Eternal War in Memory]">
+                <i class="fa fa-chevron-left"></i> 读书笔记[SoK Eternal War in Memory]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="李书赫">
+            
+              <p class="site-author-name" itemprop="name">李书赫</p>
+              <p class="site-description motion-element" itemprop="description">It works on my machine</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction-and-introduction"><span class="nav-number">1.</span> <span class="nav-text">Abstraction and introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#automated-binary-analysis"><span class="nav-number">2.</span> <span class="nav-text">automated binary analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#trade-offs"><span class="nav-number">2.1.</span> <span class="nav-text">trade offs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-DARPA-Cyber-Grand-Challenge"><span class="nav-number">2.2.</span> <span class="nav-text">The DARPA Cyber Grand Challenge</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BACKGROUND-static-vulnerability-discovery"><span class="nav-number">3.</span> <span class="nav-text">BACKGROUND: static vulnerability discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recovering-Control-flow-CFG"><span class="nav-number">3.1.</span> <span class="nav-text">Recovering Control flow(CFG)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vulnerability-detection-with-data-modeling"><span class="nav-number">3.2.</span> <span class="nav-text">vulnerability detection with data modeling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BACKGROUND-dynamic-vulnerability-discovery"><span class="nav-number">4.</span> <span class="nav-text">BACKGROUND: dynamic vulnerability discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dynamic-concrete-execution"><span class="nav-number">4.1.</span> <span class="nav-text">dynamic concrete execution</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fuzzing"><span class="nav-number">4.1.1.</span> <span class="nav-text">fuzzing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dynamic-symbolic-execution"><span class="nav-number">4.1.2.</span> <span class="nav-text">dynamic symbolic execution</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BACKGROUND-exploitation"><span class="nav-number">5.</span> <span class="nav-text">BACKGROUND: exploitation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crash-reproduction"><span class="nav-number">5.1.</span> <span class="nav-text">crash reproduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exploit-generation"><span class="nav-number">5.2.</span> <span class="nav-text">exploit generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exploit-hardening"><span class="nav-number">5.3.</span> <span class="nav-text">exploit hardening</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-engine"><span class="nav-number">6.</span> <span class="nav-text">Analysis engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-CFG-recovery"><span class="nav-number">7.</span> <span class="nav-text">IMPLEMENTATION: CFG recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CFGAccurate"><span class="nav-number">7.1.</span> <span class="nav-text">CFGAccurate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CFGFast"><span class="nav-number">7.2.</span> <span class="nav-text">CFGFast</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-value-set-analysis"><span class="nav-number">8.</span> <span class="nav-text">IMPLEMENTATION: value set analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-under-constrained-symbolic-execution"><span class="nav-number">9.</span> <span class="nav-text">IMPLEMENTATION: under constrained symbolic execution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-symbolic-assisted-fuzzing"><span class="nav-number">10.</span> <span class="nav-text">IMPLEMENTATION: symbolic assisted fuzzing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-crash-reproduction"><span class="nav-number">11.</span> <span class="nav-text">IMPLEMENTATION: crash reproduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-exploit"><span class="nav-number">12.</span> <span class="nav-text">IMPLEMENTATION: exploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMPLEMENTATION-exploit-hardening"><span class="nav-number">13.</span> <span class="nav-text">IMPLEMENTATION: exploit hardening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparative-evaluation"><span class="nav-number">14.</span> <span class="nav-text">Comparative evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CFG-recovery"><span class="nav-number">14.1.</span> <span class="nav-text">CFG recovery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluation-of-vulnerability-analysis-techniques"><span class="nav-number">14.2.</span> <span class="nav-text">Evaluation of vulnerability analysis techniques</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李书赫</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
