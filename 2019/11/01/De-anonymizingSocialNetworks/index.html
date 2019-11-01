@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Computer Security,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="abstractthis paper propose a effective de-anonymization algorithm with 12% error rate. contribution survey the current state of data sharing in social network. result in privacy risks include auxiliar">
+<meta name="keywords" content="Computer Security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记[De-anonymizingSocialNetworks]">
+<meta property="og:url" content="http://yoursite.com/2019/11/01/De-anonymizingSocialNetworks/index.html">
+<meta property="og:site_name" content="404 Not Found">
+<meta property="og:description" content="abstractthis paper propose a effective de-anonymization algorithm with 12% error rate. contribution survey the current state of data sharing in social network. result in privacy risks include auxiliar">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/De-anonymizingSocialNetworks/pseudo.PNG">
+<meta property="og:updated_time" content="2019-11-01T09:22:42.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读书笔记[De-anonymizingSocialNetworks]">
+<meta name="twitter:description" content="abstractthis paper propose a effective de-anonymization algorithm with 12% error rate. contribution survey the current state of data sharing in social network. result in privacy risks include auxiliar">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/01/De-anonymizingSocialNetworks/pseudo.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":25,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/01/De-anonymizingSocialNetworks/">
+
+
+
+
+
+  <title>读书笔记[De-anonymizingSocialNetworks] | 404 Not Found</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">404 Not Found</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/De-anonymizingSocialNetworks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李书赫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="404 Not Found">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读书笔记[De-anonymizingSocialNetworks]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T15:36:51+08:00">
+                2019-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h3><p>this paper propose a effective de-anonymization algorithm with 12% error rate.</p>
+<h3 id="contribution"><a href="#contribution" class="headerlink" title="contribution"></a>contribution</h3><ol>
+<li>survey the current state of data sharing in social network. result in privacy risks include auxiliary information.</li>
+<li>define privacy in social networks and relate it to node anonymity. identify categories of attacks, give a methodology for measuring the extent of privacy breaches in social networks.</li>
+<li>develop generic re-identification algorithm for anonymize social netowrk.</li>
+<li>give concret demostration of algorithm by applying it fo Flickr and Twitter. </li>
+</ol>
+<p>result: a third of the users who are verifiable members of both Flickr and Twitter can be recognized in the completely anonymous Twitter graph with only 12% errors.</p>
+<h3 id="State-of-the-Union"><a href="#State-of-the-Union" class="headerlink" title="State of the Union"></a>State of the Union</h3><p>这部分主要是分析目前市场上的数据类型。说明了算法所需要的数据很容易得到。对应contribution 1, 2.<br>The data is available from 5 types</p>
+<ol>
+<li>academic and government data-mining</li>
+<li>advertising</li>
+<li>third-party applications.</li>
+<li>aggregation: information from multiple social networks</li>
+<li>other data-release scenarios</li>
+</ol>
+<h3 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h3><p>这个section主要分析隐私属性和之前的工作。对应contribution 1， 2.</p>
+<h4 id="privacy-properties"><a href="#privacy-properties" class="headerlink" title="privacy properties"></a>privacy properties</h4><p>sensitive info in graph: 1. existence of an edge between two nodes, 2. edge attributes(phone call frequency). 3. node attributes(node degree).</p>
+<h4 id="de-anonymization-attacks"><a href="#de-anonymization-attacks" class="headerlink" title="de-anonymization attacks"></a>de-anonymization attacks</h4><h5 id="active-attacks"><a href="#active-attacks" class="headerlink" title="active attacks"></a>active attacks</h5><p>assumptions: adversay is able to modify the network prior to its release.<br>by creating O(logN) new sybil nodes(whose outgoing edges help re-identify quadratically as many existing nodes)<br>ps: 具体的攻击方法被隐去了，但是分析了局限性。</p>
+<ol>
+<li>need to create fake nodes. </li>
+<li>no control over edges incoming-&gt;easy to identify that the graph is under sybil attacks.</li>
+<li>OSN(online social networks) always require a link to be mutual before information is available.</li>
+</ol>
+<p>cur-based attacks create 7-node subgraphs containing hamiltonian path-&gt;easy to detect.</p>
+<h5 id="passive-attacks"><a href="#passive-attacks" class="headerlink" title="passive attacks"></a>passive attacks</h5><p>small coalition(group) of uses discover their location in the anonymized graph by utilizing the knowledge of newtork structure around them.<br>but this attack can only be applied to small scale graph.</p>
+<h5 id="defenses"><a href="#defenses" class="headerlink" title="defenses"></a>defenses</h5><p>Existing privacy protection mechanisms for social networks are only effective against very restricted adversaries and have been evaluated on small, simulated networks whose characteristics are different from real social networks.</p>
+<ol>
+<li>prevent network operators from capitalizing on user-provided data.</li>
+<li>anonymity. applications see randomized tokens representing users instead of actual identifiers.</li>
+</ol>
+<h3 id="model-and-definitions"><a href="#model-and-definitions" class="headerlink" title="model and definitions"></a>model and definitions</h3><p>graph G = (V, E).<br>attributes X for each node in V.<br>attributes Y for each edge in E.<br>discretized attributes.<br>anonymization: </p>
+<ol>
+<li>only publishing a subset of attributes. </li>
+<li>perturbation or sanitization that changes the graph structure.</li>
+</ol>
+<p>link prediction: produces plausible fake edges.</p>
+<h3 id="threat-model"><a href="#threat-model" class="headerlink" title="threat model"></a>threat model</h3><h4 id="attack-scenarios"><a href="#attack-scenarios" class="headerlink" title="attack scenarios"></a>attack scenarios</h4><ol>
+<li>government-level agency interested in global surveillance. (large S-aux, objective: large-scale collection of detailed info about many individuals)</li>
+<li>abusive markieting. (de-anonymize the graph using publicly available data)</li>
+<li>targeted deanonymization of specific individuals. (detailed contextual info about a single individual. objective is to use info to recognize the victim’s node)</li>
+</ol>
+<h4 id="aggregate-auxiliary-information"><a href="#aggregate-auxiliary-information" class="headerlink" title="aggregate auxiliary information"></a>aggregate auxiliary information</h4><p>S-aux = G-aux(V-aux, E-aux).<br>AUX-X: attribute distribution of node. for example: [0.2, 0.8] -&gt; 20% to be a friend with Lily.<br>AUX-Y: attribute distribution of edge</p>
+<h4 id="individual-auxiliary-information"><a href="#individual-auxiliary-information" class="headerlink" title="individual auxiliary information"></a>individual auxiliary information</h4><p>this part is used for seed.<br>for a small number of members of target networks S. attackers can determine the exists in S-aux.</p>
+<h3 id="breach-privacy"><a href="#breach-privacy" class="headerlink" title="breach privacy"></a>breach privacy</h3><p>focusing solely on node re-identification.<br>groundtruth: mapping u-G between V-aux and V-san. if u-G(V) = NULL -&gt; no mapping.<br>no need to maping every node in V-aux.<br>mapping is 1 to 1.<br>node re-identification succeeds on a node v-aux if u(v-aux) = u-G(v-aux)</p>
+<h3 id="de-anonymization"><a href="#de-anonymization" class="headerlink" title="de-anonymization"></a>de-anonymization</h3><h4 id="seed-identification"><a href="#seed-identification" class="headerlink" title="seed identification"></a>seed identification</h4><p>assume the attacker’s individual auxiliary information consisits of a clique of k nodes.<br>clique(全连接子图)<br>input: 1. target graph, 2. k nodes in auxiliary graph, 3. k node degree values, 4. 2 out of k parirs of common neithbor counts, 5. error parameter<br>algorithm search the target graph for a unique k-clique with matching node degrees and common-neighbor counts.</p>
+<h4 id="propagation"><a href="#propagation" class="headerlink" title="propagation"></a>propagation</h4><p>input: G1 = (V1, E1), G2 = (V2, E2), seed mapping.<br>output mappint u.<br>algorithm: picks arbitrary unmapped node u in V1 and computes a score for each unmapped node v in V2 equal to the number of neighbors of u that have been mapped to neighbors of v.</p>
+<p>Eccentricity: measure how much terms stands out from the rest. (max(x) - second_max(x)) / standard deviation(x)<br>Edge directionallity: compute two scores. 1. based only on the incoming edges, 2. based only on the outgoing edges.<br>node degerees: the score of each node is divided by the square root of its degree.<br>revisiting nodes: revisit already mapped nodes.<br>reverse match: from G1 to G2, from G2 to G1.<br><img src="pseudo.PNG" alt></p>
+<h4 id="complexity-analysis"><a href="#complexity-analysis" class="headerlink" title="complexity analysis"></a>complexity analysis</h4><p>assume a node is revisited only if the number of already mapped neighbors of the node has increased by at least 1.<br>complexity = O((|E1|+|E2)<em>d1</em>d2)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Computer-Security/" rel="tag"># Computer Security</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/13/OffensiveTechniquesInBinary/" rel="next" title="读书笔记[Offensive Techniques in Binary Analysis]">
+                <i class="fa fa-chevron-left"></i> 读书笔记[Offensive Techniques in Binary Analysis]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="李书赫">
+            
+              <p class="site-author-name" itemprop="name">李书赫</p>
+              <p class="site-description motion-element" itemprop="description">It works on my machine</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contribution"><span class="nav-number">2.</span> <span class="nav-text">contribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-of-the-Union"><span class="nav-number">3.</span> <span class="nav-text">State of the Union</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#related-work"><span class="nav-number">4.</span> <span class="nav-text">related work</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#privacy-properties"><span class="nav-number">4.1.</span> <span class="nav-text">privacy properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#de-anonymization-attacks"><span class="nav-number">4.2.</span> <span class="nav-text">de-anonymization attacks</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#active-attacks"><span class="nav-number">4.2.1.</span> <span class="nav-text">active attacks</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#passive-attacks"><span class="nav-number">4.2.2.</span> <span class="nav-text">passive attacks</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#defenses"><span class="nav-number">4.2.3.</span> <span class="nav-text">defenses</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#model-and-definitions"><span class="nav-number">5.</span> <span class="nav-text">model and definitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#threat-model"><span class="nav-number">6.</span> <span class="nav-text">threat model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#attack-scenarios"><span class="nav-number">6.1.</span> <span class="nav-text">attack scenarios</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aggregate-auxiliary-information"><span class="nav-number">6.2.</span> <span class="nav-text">aggregate auxiliary information</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#individual-auxiliary-information"><span class="nav-number">6.3.</span> <span class="nav-text">individual auxiliary information</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#breach-privacy"><span class="nav-number">7.</span> <span class="nav-text">breach privacy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#de-anonymization"><span class="nav-number">8.</span> <span class="nav-text">de-anonymization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#seed-identification"><span class="nav-number">8.1.</span> <span class="nav-text">seed identification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#propagation"><span class="nav-number">8.2.</span> <span class="nav-text">propagation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#complexity-analysis"><span class="nav-number">8.3.</span> <span class="nav-text">complexity analysis</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李书赫</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
